@@ -10,8 +10,8 @@
   var PUBLIC_REPO = "https://github.com/ShadyMayez/vixana-website";  // the site and the downloads
   var RELEASE = PUBLIC_REPO + "/releases/latest";
   var DOWNLOADS = {                                                  // direct links where one file fits
-    windows: RELEASE + "/download/Vixana_6.0.0_x64-setup.exe",
-    linux: RELEASE + "/download/Vixana_6.0.0_amd64.AppImage",          // .deb and .rpm are linked beside it
+    windows: RELEASE + "/download/Vixana_6.1.0_x64-setup.exe",
+    linux: RELEASE + "/download/Vixana_6.1.0_amd64.AppImage",          // .deb and .rpm are linked beside it
   };
   // the folder this page is served from, so a site under a path (user.github.io/vixana-website/) works too
   var site = /^https?:$/.test(location.protocol)
