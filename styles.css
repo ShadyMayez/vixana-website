@@ -188,6 +188,14 @@ code { font-family: var(--mono); font-size: 0.86em; color: var(--marble); }
 .faq details[open] summary::after { content: "−"; }
 .faq details p { margin: 0 0 24px; max-width: var(--measure); }
 
+/* ---------- privacy and terms pages ---------- */
+.doc { max-width: 760px; margin: 0 auto; padding: 56px var(--gutter) 96px; }
+.doc .inscription { font-size: clamp(40px, 6vw, 64px); }
+.doc-date { color: var(--stone); font-size: 14px; margin: 14px 0 40px; }
+.doc h2 { margin: 40px 0 10px; font: 600 26px/1.2 var(--serif); color: var(--marble); }
+.doc p, .doc li { max-width: var(--measure); }
+.doc ul { padding-left: 20px; }
+
 /* ---------- footer ---------- */
 .foot { border-top: 1px solid var(--vein); padding: 72px var(--gutter) 48px; display: grid; justify-items: center; gap: 28px; text-align: center; }
 .foot-mark { width: min(420px, 70vw); opacity: 0.9; }
