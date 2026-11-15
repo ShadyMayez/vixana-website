@@ -65,35 +65,37 @@ code { font-family: var(--courier); font-size: 0.95em; color: var(--marble); }
 .bar-nav a { font: 400 12px/1 var(--courier); letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; }
 .bar-nav a:hover { color: var(--marble); }
 
-/* ---------- hero: the statement inside the carved gate ---------- */
-/* The gate is drawn 1400 x 1489; its crown starts at the top and the opening's arch at 12.5% of its height. */
-.hero { --gate: min(1240px, 104vw); position: relative; margin-top: -80px; padding: calc(var(--gate) * 0.155) var(--gutter) 72px; overflow: hidden; }
-.hero-bg {
-  position: absolute; inset: 0 0 auto; height: calc(var(--gate) * 1.064); z-index: 0;
-  background-color: var(--ink);
-  background-image: url("assets/bg/gate.webp"), url("assets/bg/heads.webp");
-  background-size: var(--gate) auto, 100% auto;
-  background-position: center top, center top;
-  background-repeat: no-repeat;
-  background-blend-mode: lighten;
-  -webkit-mask-image: linear-gradient(#000 62%, transparent); mask-image: linear-gradient(#000 62%, transparent);
-}
-/* darken behind the words, so the subtitle keeps its contrast over the carved V */
-.hero-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 42% 30% at 50% 44%, rgba(0,0,0,.62), rgba(0,0,0,0) 100%); }
-.hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.statement {
-  margin: 0; max-width: 48rem; font: 800 clamp(2.9rem, 8vw, 7rem)/0.9 var(--expanded); letter-spacing: 0.02em;
-  text-transform: uppercase; color: var(--marble); display: flex; flex-direction: column; align-items: center;
-  text-shadow: 0 2px 40px rgba(0, 0, 0, .55);
-}
-.statement-line { display: block; white-space: nowrap; }
-/* VIXANA, drawn (website/art/make_statement.py): cap height 0.686em like the lines under it */
-.statement-word { display: block; height: 0.686em; width: auto; margin: 0.107em auto; fill: currentColor; filter: drop-shadow(0 2px 30px rgba(0, 0, 0, .6)); overflow: visible; }
-.hero-sub { margin: 30px auto 0; max-width: 40rem; font: 500 clamp(19px, 2.2vw, 23px)/1.45 var(--serif); color: #e2e2e2; }
-.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
-.shot { position: relative; margin: 64px 0 0; width: 100%; max-width: 1120px; padding: 10px; border: 1px solid var(--frame); background: rgba(10, 10, 10, .72); box-shadow: 0 40px 120px rgba(0, 0, 0, .8); }
+/* ---------- hero: the name, built by the lines that flow into its V (hero.js) ---------- */
+.hero { position: relative; margin-top: -80px; min-height: max(640px, 100svh); display: grid; place-items: center; padding: 120px var(--gutter) 120px; overflow: hidden; isolation: isolate; }
+.hero-flow { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; }
+.hero::after { content: ""; position: absolute; inset: auto 0 0; height: 160px; z-index: -1; background: linear-gradient(transparent, var(--ink)); pointer-events: none; }
+.hero-inner { width: 100%; display: grid; justify-items: center; text-align: center; }
+.hero-name { margin: 0; width: min(1180px, 92vw); line-height: 0; }
+.statement-word { display: block; width: 100%; height: auto; fill: var(--marble); overflow: visible; }
+.hero-tag { margin: clamp(26px, 4vw, 48px) 0 0; font: 500 clamp(24px, 3.2vw, 42px)/1.2 var(--serif); color: var(--marble); }
+.hero-meta { margin: 14px 0 0; font: 700 12px/1.4 var(--courier); letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+.scroll-cue { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); display: grid; justify-items: center; gap: 10px; text-decoration: none; font: 700 10px/1 var(--courier); letter-spacing: 0.24em; text-transform: uppercase; color: var(--stone); }
+.scroll-cue::after { content: ""; width: 1px; height: 46px; background: linear-gradient(var(--marble), transparent); transform-origin: top; animation: cue 2.4s ease-in-out infinite; }
+@keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+/* the sequence (only where motion is welcome; hero.js draws the lines in time with it): the V solidifies, the name wipes in, the words rise */
+.motion .hero .word-v { animation: fade-in .9s 2.2s both; }
+.motion .hero .word-rest { animation: wipe-in 1.1s 2.75s cubic-bezier(.65, 0, .2, 1) both; }
+.motion .hero .hero-tag { animation: rise .9s 3.5s both; }
+.motion .hero .hero-meta { animation: rise .9s 3.7s both; }
+.motion .hero .hero-actions { animation: rise .9s 3.9s both; }
+.motion .hero .scroll-cue { animation: fade-in 1s 4.4s both; }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes wipe-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+
+/* the Studio, right under the hero */
+.intro { border-top: 0; padding-top: 40px; }
+.intro-head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: end; margin-bottom: 56px; }
+.intro-head .section-lede { margin: 0; }
+.shot { position: relative; margin: 0; width: 100%; padding: 10px; border: 1px solid var(--frame); background: rgba(10, 10, 10, .72); box-shadow: 0 40px 120px rgba(0, 0, 0, .8); }
 .shot img { width: 100%; border: 1px solid #1d1d1d; }
-.shot-caption { margin: 18px 0 0; font: 400 12px/1.5 var(--courier); letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); }
+.shot-caption { text-align: center; margin: 18px 0 0; font: 400 12px/1.5 var(--courier); letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); }
 
 /* ---------- sections ---------- */
 .section { position: relative; padding: 120px var(--gutter); border-top: 1px solid var(--vein); overflow: hidden; }
@@ -221,8 +223,7 @@ code { font-family: var(--courier); font-size: 0.95em; color: var(--marble); }
   .engine-pair { grid-template-columns: 1fr; }
   .engine + .engine { padding-left: 0; border-left: 0; border-top: 1px solid var(--vein); }
   .section { padding: 84px var(--gutter); }
-  .hero { padding-top: max(130px, calc(var(--gate) * 0.2)); }
-  .hero-bg { background-size: var(--gate) auto, 160% auto; }
+  .intro-head { grid-template-columns: 1fr; }
   .foot { padding-top: 110px; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .scroll-cue::after { animation: none; } }

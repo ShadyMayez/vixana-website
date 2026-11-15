@@ -12,8 +12,9 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/icon-256.png">
 <link rel="preload" href="assets/fonts/archivo-expanded-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/bg/gate.webp" as="image">
-<link rel="stylesheet" href="styles.css?v=6.1.0-3">
+<link rel="stylesheet" href="styles.css?v=6.2.0-1">
+<!-- the hero's sequence plays only where motion is welcome; set before the first paint so nothing flashes -->
+<script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -36,23 +37,31 @@
 </header>
 
 <main id="main">
-  <!-- Hero: the statement inside the carved gate; the two heads far out at the edges -->
+  <!-- Hero: lines from every side gather into the V (many models, one answer), then the name completes -->
   <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="hero-bg" aria-hidden="true"></div>
+    <canvas class="hero-flow" aria-hidden="true"></canvas>
     <div class="hero-inner">
-      <h1 id="hero-title" class="statement" aria-label="Vixana local AutoML">
-        <span class="statement-line statement-name"><!-- statement: written by website/art/make_statement.py --><svg class="statement-word" viewBox="0 0 753.8 100" aria-hidden="true"><path d="M2.11 0 65.96 100 129.82 0H120.51L88.26 48.23L115.81 0H109.74L83.74 38.46L105.07 0H97.54L65.96 49.46L34.38 0H26.85L48.18 38.46L22.19 0H16.12L43.66 48.23L11.42 0Z M147.08 100H176.68V-0.29H168.93L166.81 56.15L164.69 -0.29H159.07L156.95 56.15L154.83 -0.29H147.08Z M195.34 100H230.9L259.33 67.35H260.93L288.63 100H326.97L279.59 46.94L322.74 -0.29H310.91L286.96 27.15L306.06 -0.29H299.14L275.58 27.15L294.3 -0.29H287.32L262.97 27.84H261.52L238.05 -0.29H230.22L248.04 27.15L224.97 -0.29H217.49L235.75 27.15L212.24 -0.29H199.71L242.86 48.25Z M334.11 100H364.72L372.3 83.97H425.95L433.53 100H465.74L416.47 -0.29H409.07L418.79 24.1L404.53 -0.29H395.27L380.58 24.1L390.73 -0.29H383.38ZM382.22 62.24 391.25 41.84Q392.27 39.8 393.51 36.59Q394.75 33.38 396.21 29.88Q397.67 26.38 398.69 23.76H399.71Q400.29 24.93 401.17 27.33Q402.04 29.74 403.21 32.58Q404.37 35.42 405.39 37.97Q406.41 40.52 407 41.84L416.03 62.24Z M483.24 100H511.22V56.56Q511.22 51.75 511.15 47.52Q511.08 43.29 511.08 41.4H512.24Q514.58 43.59 518.37 47.38Q522.16 51.17 525.66 54.23L576.38 100H602.48V-0.29H595.16L593.19 56.15L591.14 -0.29H585.83L583.91 56.15L581.82 -0.29H574.49V44.46Q574.49 47.52 574.56 51.46Q574.64 55.39 574.64 58.02H573.32Q571.72 56.12 569.46 53.94Q567.2 51.75 565.09 49.71Q562.97 47.67 561.66 46.5L509.77 -0.29H505.46L540.9 42.15L501.65 -0.29H494.14L492.09 42.15L490.32 -0.29H483.24Z M619.97 100H650.58L658.16 83.97H711.81L719.39 100H751.6L702.33 -0.29H694.93L704.65 24.1L690.39 -0.29H681.13L666.44 24.1L676.59 -0.29H669.24ZM668.08 62.24 677.11 41.84Q678.13 39.8 679.37 36.59Q680.61 33.38 682.07 29.88Q683.53 26.38 684.55 23.76H685.57Q686.15 24.93 687.03 27.33Q687.9 29.74 689.07 32.58Q690.23 35.42 691.25 37.97Q692.27 40.52 692.86 41.84L701.9 62.24Z"/></svg><!-- /statement --></span>
-        <span class="statement-line" aria-hidden="true">Local</span>
-        <span class="statement-line" aria-hidden="true">AutoML</span>
-      </h1>
-      <p class="hero-sub">Give it a table and the column you want to predict. Vixana trains many models, tests each one
-        on rows it has not seen, and joins the best into one predictor, all on your own computer.</p>
+      <h1 id="hero-title" class="hero-name" aria-label="Vixana"><!-- statement: written by website/art/make_statement.py --><svg class="statement-word" viewBox="0 0 753.8 100" data-v="2.11 127.71 32.28 4.84" aria-hidden="true"><path class="word-v" d="M2.11 0 65.96 100 129.82 0H120.51L88.26 48.23L115.81 0H109.74L83.74 38.46L105.07 0H97.54L65.96 49.46L34.38 0H26.85L48.18 38.46L22.19 0H16.12L43.66 48.23L11.42 0Z"/><path class="word-rest" d="M147.08 100H176.68V-0.29H168.93L166.81 56.15L164.69 -0.29H159.07L156.95 56.15L154.83 -0.29H147.08Z M195.34 100H230.9L259.33 67.35H260.93L288.63 100H326.97L279.59 46.94L322.74 -0.29H310.91L286.96 27.15L306.06 -0.29H299.14L275.58 27.15L294.3 -0.29H287.32L262.97 27.84H261.52L238.05 -0.29H230.22L248.04 27.15L224.97 -0.29H217.49L235.75 27.15L212.24 -0.29H199.71L242.86 48.25Z M334.11 100H364.72L372.3 83.97H425.95L433.53 100H465.74L416.47 -0.29H409.07L418.79 24.1L404.53 -0.29H395.27L380.58 24.1L390.73 -0.29H383.38ZM382.22 62.24 391.25 41.84Q392.27 39.8 393.51 36.59Q394.75 33.38 396.21 29.88Q397.67 26.38 398.69 23.76H399.71Q400.29 24.93 401.17 27.33Q402.04 29.74 403.21 32.58Q404.37 35.42 405.39 37.97Q406.41 40.52 407 41.84L416.03 62.24Z M483.24 100H511.22V56.56Q511.22 51.75 511.15 47.52Q511.08 43.29 511.08 41.4H512.24Q514.58 43.59 518.37 47.38Q522.16 51.17 525.66 54.23L576.38 100H602.48V-0.29H595.16L593.19 56.15L591.14 -0.29H585.83L583.91 56.15L581.82 -0.29H574.49V44.46Q574.49 47.52 574.56 51.46Q574.64 55.39 574.64 58.02H573.32Q571.72 56.12 569.46 53.94Q567.2 51.75 565.09 49.71Q562.97 47.67 561.66 46.5L509.77 -0.29H505.46L540.9 42.15L501.65 -0.29H494.14L492.09 42.15L490.32 -0.29H483.24Z M619.97 100H650.58L658.16 83.97H711.81L719.39 100H751.6L702.33 -0.29H694.93L704.65 24.1L690.39 -0.29H681.13L666.44 24.1L676.59 -0.29H669.24ZM668.08 62.24 677.11 41.84Q678.13 39.8 679.37 36.59Q680.61 33.38 682.07 29.88Q683.53 26.38 684.55 23.76H685.57Q686.15 24.93 687.03 27.33Q687.9 29.74 689.07 32.58Q690.23 35.42 691.25 37.97Q692.27 40.52 692.86 41.84L701.9 62.24Z"/></svg><!-- /statement --></h1>
+      <p class="hero-tag">The model that builds your models.</p>
+      <p class="hero-meta">Local AutoML for Windows, Linux and macOS</p>
       <div class="hero-actions">
         <a class="btn btn-icon" id="primary-download" href="#download"><span class="btn-glyph" aria-hidden="true">↓</span><span class="btn-label">Download</span></a>
         <a class="btn btn-ghost btn-icon" href="#terminal"><span class="btn-glyph" aria-hidden="true">$</span><span class="btn-label">Install the CLI</span></a>
       </div>
+    </div>
+    <a class="scroll-cue" href="#studio"><span>Scroll</span></a>
+  </section>
+
+  <!-- The Studio -->
+  <section class="section intro" id="studio" aria-labelledby="studio-title">
+    <div class="wrap">
+      <div class="intro-head">
+        <h2 id="studio-title" class="title">Give it a table.<br>Get a model.</h2>
+        <p class="section-lede">Choose the column you want to predict. Vixana trains many models, tests each one on rows it
+          has not seen, and joins the best into one predictor, all on your own computer.</p>
+      </div>
       <figure class="shot">
-        <img src="assets/img/studio.webp" alt="The Vixana Studio showing a finished experiment: log loss 0.0459, a weighted ensemble of two models, trained in 48 seconds." width="1600" height="1000">
+        <img src="assets/img/studio.webp" alt="The Vixana Studio showing a finished experiment: log loss 0.0459, a weighted ensemble of two models, trained in 48 seconds." width="1600" height="1000" loading="lazy">
       </figure>
       <p class="shot-caption">The Studio: experiments, models, predictions and notebooks, in one window on your machine.</p>
     </div>
@@ -301,5 +310,6 @@
 </footer>
 
 <script src="site.js?v=6.1.0-2" defer></script>
+<script src="hero.js?v=6.2.0-1" defer></script>
 </body>
 </html>
