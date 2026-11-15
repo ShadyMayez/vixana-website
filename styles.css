@@ -74,7 +74,7 @@ code { font-family: var(--mono); font-size: 0.86em; color: var(--marble); }
   content: ""; position: absolute; inset: -28px -48px auto; height: 140px; z-index: -1;
   background: radial-gradient(closest-side, #000 72%, transparent);
 }
-.hero-art img { width: 100%; animation: carve 1.6s cubic-bezier(.2, .7, .2, 1) both; }
+.hero-art img { width: 100%; animation: carve 1.6s cubic-bezier(.2, .7, .2, 1) both; mix-blend-mode: screen; } /* its black lets the heads behind show */
 @keyframes carve { from { clip-path: inset(0 0 100% 0); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
 .hero-text { position: relative; max-width: 760px; }
 .hero h1 { margin: 0; }
