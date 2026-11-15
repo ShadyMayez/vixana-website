@@ -11,7 +11,7 @@
   var RELEASE = PUBLIC_REPO + "/releases/latest";
   var DOWNLOADS = {                                                  // direct links where one file fits
     windows: RELEASE + "/download/Vixana_6.0.0_x64-setup.exe",
-    linux: RELEASE,                                                  // AppImage, .deb or .rpm: let them choose
+    linux: RELEASE + "/download/Vixana_6.0.0_amd64.AppImage",          // .deb and .rpm are linked beside it
   };
   // the folder this page is served from, so a site under a path (user.github.io/vixana-website/) works too
   var site = /^https?:$/.test(location.protocol)
@@ -22,8 +22,13 @@
     unix: "curl -fsSL " + site + "/install.sh | sh",
     win: "irm " + site + "/install.ps1 | iex",
   };
+  // a long address may wrap, but only after a slash (<wbr> adds no character, so a selected command copies clean)
   document.querySelectorAll("[data-cmd]").forEach(function (el) {
-    el.textContent = commands[el.getAttribute("data-cmd")];
+    el.textContent = "";
+    commands[el.getAttribute("data-cmd")].split("/").forEach(function (part, i) {
+      if (i) { el.appendChild(document.createTextNode("/")); el.appendChild(document.createElement("wbr")); }
+      el.appendChild(document.createTextNode(part));
+    });
   });
   document.querySelectorAll("[data-repo]").forEach(function (a) { a.href = PUBLIC_REPO; });
   document.querySelectorAll("[data-release]").forEach(function (a) {
