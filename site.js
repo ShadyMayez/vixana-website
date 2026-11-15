@@ -41,10 +41,11 @@
   var os = /Windows/i.test(ua) ? "windows" : /Mac OS X|Macintosh/i.test(ua) && !/Mobile/i.test(ua) ? "mac"
     : /Linux|X11/i.test(ua) && !/Android/i.test(ua) ? "linux" : "other";
   var primary = document.getElementById("primary-download");
-  if (primary) {
-    if (os === "windows") { primary.textContent = "Download for Windows"; primary.href = "#windows"; }
-    else if (os === "linux") { primary.textContent = "Download for Linux"; primary.href = "#linux"; }
-    else if (os === "mac") { primary.textContent = "Install on macOS"; primary.href = "#terminal"; }
+  var label = primary && primary.querySelector(".btn-label");
+  if (primary && label) {
+    if (os === "windows") { label.textContent = "Download for Windows"; primary.href = DOWNLOADS.windows; }
+    else if (os === "linux") { label.textContent = "Download for Linux"; primary.href = "#linux"; }
+    else if (os === "mac") { label.textContent = "Install on macOS"; primary.href = "#terminal"; }
   }
 
   // Terminal tabs (arrow keys move between them, as a tab list should).

@@ -3,13 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vixana — AutoML on your own computer</title>
-<meta name="description" content="Vixana trains many models on your table, checks each one on rows it has not seen, and joins the best into one predictor. Desktop app for Linux and Windows, and a command line for any system.">
+<title>Vixana — local AutoML for your own models</title>
+<meta name="description" content="Vixana trains many models on your table, checks each one on rows it has not seen, and joins the best into one predictor, on your own computer. Desktop app for Windows and Linux, command line for Linux, macOS and Windows.">
 <meta name="theme-color" content="#000000">
+<meta property="og:title" content="Vixana — local AutoML">
+<meta property="og:description" content="Many models, checked against data they have not seen, joined into one answer. On your own computer.">
+<meta property="og:image" content="assets/img/icon-256.png">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/icon-256.png">
-<link rel="preload" href="assets/fonts/cormorant-garamond-500.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=6.0.0-10">
+<link rel="preload" href="assets/fonts/archivo-expanded-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/bg/hero.webp" as="image">
+<link rel="stylesheet" href="styles.css?v=6.1.0-2">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -21,6 +25,7 @@
       <span class="bar-tag">AutoML for your own models</span>
     </a>
     <nav class="bar-nav" aria-label="Sections">
+      <a href="#why">Why</a>
       <a href="#how">How it works</a>
       <a href="#results">Results</a>
       <a href="#faq">Questions</a>
@@ -31,196 +36,240 @@
 </header>
 
 <main id="main">
+  <!-- Hero: the statement over the carved arch, blurred -->
   <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="hero-bust hero-bust-left" aria-hidden="true"><img src="assets/art/photo-antinous.png" alt="" width="900" height="1080"></div>
-    <div class="hero-bust hero-bust-right" aria-hidden="true"><img src="assets/art/photo-hadrian.png" alt="" width="900" height="985"></div>
-    <div class="hero-art" aria-hidden="true"><img src="assets/art/hero.png" alt="" width="1600" height="1240"></div>
-    <div class="hero-text">
-      <h1 id="hero-title"><img class="hero-wordmark" src="assets/img/wordmark.svg" alt="Vixana" width="908" height="240"></h1>
-      <p class="hero-line">AutoML that runs on your own computer.</p>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <h1 id="hero-title" class="statement" aria-label="Vixana local AutoML">
+        <span class="statement-line" aria-hidden="true"><svg class="statement-v" viewBox="0 0 560 576"><path d="M0 0 280 576 560 0H522.6L379.4 282.38L501.35 0H479.22L361.2 230.67L458.13 0H430L280 308.57L130 0H101.87L198.8 230.67L80.78 0H58.65L180.6 282.38L37.4 0Z"/></svg>IXANA</span>
+        <span class="statement-line" aria-hidden="true">Local</span>
+        <span class="statement-line" aria-hidden="true">AutoML</span>
+      </h1>
       <p class="hero-sub">Give it a table and the column you want to predict. Vixana trains many models, tests each one
-        on rows it has not seen, and joins the best into one predictor you can keep.</p>
+        on rows it has not seen, and joins the best into one predictor, all on your own computer.</p>
       <div class="hero-actions">
-        <a class="btn" id="primary-download" href="#download">Download</a>
-        <a class="btn btn-ghost" href="#terminal">Install from the terminal</a>
+        <a class="btn btn-icon" id="primary-download" href="#download"><span class="btn-glyph" aria-hidden="true">↓</span><span class="btn-label">Download</span></a>
+        <a class="btn btn-ghost btn-icon" href="#terminal"><span class="btn-glyph" aria-hidden="true">$</span><span class="btn-label">Install the CLI</span></a>
       </div>
-      <p class="hero-note">Free for noncommercial use. Desktop app for Linux and Windows; command line for Linux,
-        macOS and Windows.</p>
+      <figure class="shot">
+        <img src="assets/img/studio.webp" alt="The Vixana Studio showing a finished experiment: log loss 0.0459, a weighted ensemble of two models, trained in 48 seconds." width="1600" height="1000">
+      </figure>
+      <p class="shot-caption">The Studio: experiments, models, predictions and notebooks, in one window on your machine.</p>
     </div>
   </section>
 
-  <section class="shot" aria-label="The Vixana Studio">
-    <figure>
-      <img src="assets/img/studio.webp" alt="The Vixana Studio showing a finished experiment: log loss 0.0459, a weighted ensemble of two models, trained in 48 seconds." width="1600" height="1000" loading="lazy">
-      <figcaption>The Studio. Experiments, models, predictions and notebooks in one window, on your machine.</figcaption>
-    </figure>
+  <!-- Why -->
+  <section class="section" id="why" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Why Vixana</p>
+        <h2 id="why-title" class="title">Built for the<br>machine you own</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <p class="card-tag">Private</p>
+          <h3>Your data stays home</h3>
+          <p>Training runs on your laptop or workstation. Your tables, models and predictions never leave it, and there
+            is no service to pay for.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">Accurate</p>
+          <h3>Many models, one answer</h3>
+          <p>Gradient-boosted trees, neural networks and pretrained tabular models compete on the same folds. The best
+            are stacked, blended and calibrated into one predictor.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">Simple</p>
+          <h3>From a CSV to a model</h3>
+          <p>Drop in a file, choose the column to predict and how long to train. Vixana works out the task, the metric
+            and the models.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">Honest</p>
+          <h3>Tested before we said it</h3>
+          <p>The results on this page come from a comparison whose rules were written before it ran, on tables Vixana
+            had never seen.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">Light</p>
+          <h3>A small GPU is enough</h3>
+          <p>The GPU engine adds a tabular foundation model on a 4 GB consumer card. Without a GPU, the CPU engine runs
+            anywhere.</p>
+        </article>
+        <article class="card">
+          <p class="card-tag">Yours</p>
+          <h3>A model file you keep</h3>
+          <p>Each run saves one <code>.vixana</code> file. Predict with it from the app, from the command line, or in
+            the built-in Python notebooks.</p>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <section class="download" id="download" aria-labelledby="download-title">
-    <div class="section-head">
-      <h2 id="download-title" class="inscription">Download</h2>
-      <p>The desktop app sets itself up on first start, a few minutes once, then opens in seconds. The command
-        line installs into your home folder and needs no administrator rights.</p>
+  <!-- How a run works, over the sarcophagus relief -->
+  <section class="section section-art" id="how" aria-labelledby="how-title">
+    <div class="section-bg" style="background-image: url(assets/bg/relief.webp)" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">How a run works</p>
+        <h2 id="how-title" class="title">Five steps,<br>inside your budget</h2>
+      </div>
+      <ol class="steps">
+        <li><span class="numeral" aria-hidden="true">I</span><h3>Screen</h3>
+          <p>Every candidate model gets a short trial on your data. The weak ones stop there.</p></li>
+        <li><span class="numeral" aria-hidden="true">II</span><h3>Validate</h3>
+          <p>The rest train on folds and are scored only on rows they did not see.</p></li>
+        <li><span class="numeral" aria-hidden="true">III</span><h3>Stack</h3>
+          <p>A second level of models learns from the first level's predictions on unseen rows.</p></li>
+        <li><span class="numeral" aria-hidden="true">IV</span><h3>Select</h3>
+          <p>Ensemble selection keeps the blend that scores best and drops the others.</p></li>
+        <li><span class="numeral" aria-hidden="true">V</span><h3>Calibrate</h3>
+          <p>Probabilities are tuned so that 0.8 means right about eight times in ten.</p></li>
+      </ol>
     </div>
-    <div class="arcade">
-      <img class="column column-left" src="assets/art/photo-column.png" alt="" aria-hidden="true" width="420" height="1243" loading="lazy">
-      <article class="arch" id="linux">
-        <div class="arch-inner">
-          <h3>Linux</h3>
-          <p class="arch-meta">AppImage, .deb or .rpm<br>64-bit x86</p>
-          <a class="btn" data-release="linux" href="https://github.com/ShadyMayez/vixana-website/releases/latest">Download for Linux</a>
+  </section>
+
+  <!-- Engines, over two portrait busts -->
+  <section class="section section-art" id="engines" aria-labelledby="engines-title">
+    <div class="section-bg" style="background-image: url(assets/bg/busts.webp)" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Two engines</p>
+        <h2 id="engines-title" class="title">CPU or GPU,<br>one pipeline</h2>
+      </div>
+      <div class="engine-pair">
+        <div class="engine">
+          <h3>CPU</h3>
+          <p class="engine-name">Vixana Core 5.7.1</p>
+          <p>Runs on any computer. Gradient-boosted trees, neural networks and a pretrained tabular model, stacked and
+            blended.</p>
         </div>
-      </article>
-      <article class="arch" id="windows">
-        <div class="arch-inner">
-          <h3>Windows</h3>
-          <p class="arch-meta">Installer (.exe) or .msi<br>Windows 10 and 11</p>
-          <a class="btn" data-release="windows" href="https://github.com/ShadyMayez/vixana-website/releases/latest">Download for Windows</a>
+        <div class="engine">
+          <h3>GPU</h3>
+          <p class="engine-name">Vixana G-final</p>
+          <p>The same pipeline plus a tabular foundation model on an NVIDIA GPU, judged by the same rules as every
+            other model. 4 GB of graphics memory is enough.</p>
         </div>
-      </article>
-      <article class="arch arch-terminal" id="terminal">
-        <div class="arch-inner">
-          <h3>Terminal</h3>
-          <div class="tabs" role="tablist" aria-label="Your system">
-            <button role="tab" id="tab-unix" aria-selected="true" aria-controls="cmd-unix">Linux and macOS</button>
-            <button role="tab" id="tab-win" aria-selected="false" aria-controls="cmd-win" tabindex="-1">Windows</button>
-          </div>
-          <div class="cmd" id="cmd-unix" role="tabpanel" aria-labelledby="tab-unix">
-            <code data-cmd="unix">curl -fsSL https://vixana.example/install.sh | sh</code>
-            <button class="copy" type="button" data-copy="unix">Copy</button>
-          </div>
-          <div class="cmd" id="cmd-win" role="tabpanel" aria-labelledby="tab-win" hidden>
-            <code data-cmd="win">irm https://vixana.example/install.ps1 | iex</code>
-            <button class="copy" type="button" data-copy="win">Copy</button>
-          </div>
-          <p class="arch-meta">Then run <code>vixana</code> to open the interactive session, or
-            <code>vixana fit data.csv -t target</code>.</p>
-        </div>
-      </article>
-      <img class="column column-right" src="assets/art/photo-column.png" alt="" aria-hidden="true" width="420" height="1243" loading="lazy">
-    </div>
-    <p class="fine">Installers are not code-signed yet, so Windows SmartScreen may ask you to confirm. Read
-      <a data-repo-path="website/install.sh" href="install.sh">install.sh</a> or <a data-repo-path="website/install.ps1" href="install.ps1">install.ps1</a> before you run them.</p>
-  </section>
-
-  <section class="how" id="how" aria-labelledby="how-title">
-    <div class="section-head">
-      <h2 id="how-title" class="inscription">How a run works</h2>
-      <p>Every run goes through the same five steps, inside the time you give it.</p>
-    </div>
-    <figure class="relief">
-      <img src="assets/art/photo-relief.png" alt="A Roman sarcophagus relief, drawn as an engraving: many figures carrying one body." width="1500" height="1056" loading="lazy">
-    </figure>
-    <ol class="frieze">
-      <li>
-        <img src="assets/art/frieze-1.png" alt="" width="720" height="720" loading="lazy">
-        <span class="numeral" aria-hidden="true">I</span>
-        <h3>Screen</h3>
-        <p>Each candidate model gets a short trial on your data. The weak ones stop there.</p>
-      </li>
-      <li>
-        <img src="assets/art/frieze-2.png" alt="" width="720" height="720" loading="lazy">
-        <span class="numeral" aria-hidden="true">II</span>
-        <h3>Validate</h3>
-        <p>The rest train on folds of the data and are scored only on rows they did not see.</p>
-      </li>
-      <li>
-        <img src="assets/art/frieze-3.png" alt="" width="720" height="720" loading="lazy">
-        <span class="numeral" aria-hidden="true">III</span>
-        <h3>Stack</h3>
-        <p>A second level of models learns from the first level's predictions on unseen rows.</p>
-      </li>
-      <li>
-        <img src="assets/art/frieze-4.png" alt="" width="720" height="720" loading="lazy">
-        <span class="numeral" aria-hidden="true">IV</span>
-        <h3>Select</h3>
-        <p>Ensemble selection keeps the blend of models that scores best, and drops the others.</p>
-      </li>
-      <li>
-        <img src="assets/art/frieze-5.png" alt="" width="720" height="720" loading="lazy">
-        <span class="numeral" aria-hidden="true">V</span>
-        <h3>Calibrate</h3>
-        <p>Probabilities are tuned so that 0.8 means right about eight times in ten.</p>
-      </li>
-    </ol>
-  </section>
-
-  <section class="engines" aria-labelledby="engines-title">
-    <h2 id="engines-title" class="inscription">Two engines</h2>
-    <div class="engine-pair">
-      <div>
-        <img class="engine-bust" src="assets/art/photo-bust-man.png" alt="" aria-hidden="true" width="900" height="1003" loading="lazy">
-        <h3>CPU</h3>
-        <p class="engine-name">Vixana Core 5.7.1</p>
-        <p>Runs on any computer. Gradient-boosted trees, neural networks and a pretrained tabular model, stacked
-          and blended.</p>
-      </div>
-      <div>
-        <img class="engine-bust" src="assets/art/photo-bust-severus.png" alt="" aria-hidden="true" width="900" height="1003" loading="lazy">
-        <h3>GPU</h3>
-        <p class="engine-name">Vixana G-final</p>
-        <p>The same pipeline plus a pretrained foundation model on an NVIDIA GPU. 4 GB of graphics memory is
-          enough.</p>
       </div>
     </div>
   </section>
 
-  <section class="results" id="results" aria-labelledby="results-title">
-    <h2 id="results-title" class="inscription">Tested in the open</h2>
-    <div class="results-grid">
-      <div>
-        <blockquote class="tablet">
-          <p>Against the five leading AutoML systems, on 30 tables it had never seen, Vixana G-final won under rules
-            written before the test began.</p>
-        </blockquote>
-        <dl class="facts">
-          <div><dt>25 · 3 · 1</dt><dd>Wins, losses and ties against AutoGluon 1.6.3 best quality, with a median gain of
-            3.9%.</dd></div>
-          <div><dt>5 of 5</dt><dd>Systems beaten under the same rules: AutoGluon (best and extreme presets), FLAML, H2O,
-            LightAutoML and MLJAR.</dd></div>
-          <div><dt>585</dt><dd>OpenML datasets the project had already used or downloaded while building Vixana. All were
-            excluded before the 30 test tables were drawn.</dd></div>
-        </dl>
-        <p class="results-note">Five minutes per table, 2 CPU threads and a 4 GB GPU, the same for every system. One of
-          the 30 tables was set aside by the registered rule after G-final hit its 8 GB memory cap there, and the CPU
-          engine did not reach the bar against AutoGluon. The paper, coming soon, reports both.</p>
+  <!-- Results, over the falling warrior -->
+  <section class="section section-art" id="results" aria-labelledby="results-title">
+    <div class="section-bg" style="background-image: url(assets/bg/warrior.webp)" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Tested in the open</p>
+        <h2 id="results-title" class="title">Ahead of the<br>leading systems</h2>
       </div>
-      <img class="results-art" src="assets/art/photo-warrior.png" alt="" aria-hidden="true" width="1400" height="1000" loading="lazy">
+      <blockquote class="tablet">
+        <p>Against the five leading AutoML systems, on 30 tables it had never seen, Vixana G-final came out ahead under
+          rules written before the test began.</p>
+      </blockquote>
+      <dl class="facts">
+        <div><dt>25 · 3 · 1</dt><dd>Wins, losses and ties against AutoGluon 1.6.3 best quality, with a median gain of
+          3.9%.</dd></div>
+        <div><dt>5 of 5</dt><dd>Systems beaten under the same rules: AutoGluon (best and extreme presets), FLAML, H2O,
+          LightAutoML and MLJAR.</dd></div>
+        <div><dt>585</dt><dd>OpenML datasets the project had already used or downloaded. All were excluded before the 30
+          test tables were drawn.</dd></div>
+      </dl>
+      <p class="results-note">Five minutes per table, 2 CPU threads and a 4 GB GPU, the same for every system. One of
+        the 30 tables was set aside by the registered rule after G-final hit its 8 GB memory cap there, and the CPU
+        engine did not reach the bar against AutoGluon. The paper, coming soon, reports both.</p>
     </div>
   </section>
 
-  <section class="faq" id="faq" aria-labelledby="faq-title">
-    <h2 id="faq-title" class="inscription">Questions</h2>
-    <details>
-      <summary>Does my data leave my computer?</summary>
-      <p>No. The desktop app and the command line train on your machine. The only network use is the first-time
-        install of the engine's packages and signing in with Google.</p>
-    </details>
-    <details>
-      <summary>Is Vixana free?</summary>
-      <p>Yes, for noncommercial use: personal projects, research, study and teaching. It is released under the
-        PolyForm Noncommercial License 1.0.0. For commercial use, contact the author.</p>
-    </details>
-    <details>
-      <summary>Do I need a graphics card?</summary>
-      <p>No. The CPU engine runs anywhere. The GPU engine needs an NVIDIA card with 4 GB or more and is used when
-        you choose it.</p>
-    </details>
-    <details>
-      <summary>Is there a Mac app?</summary>
-      <p>Not yet. On a Mac, install the command line with the terminal command above; it runs the CPU engine.</p>
-    </details>
-    <details>
-      <summary>What does the install command change?</summary>
-      <p>It puts Vixana and its Python environment in one folder in your home directory and adds a
-        <code>vixana</code> command to your user path. Nothing outside your user account is touched. To remove it,
-        delete that folder and the command.</p>
-    </details>
-    <details>
-      <summary>Why do I sign in with Google?</summary>
-      <p>So the app and a shared Vixana server know who you are. Vixana receives your name, email address and
-        picture, and nothing else from your Google account.</p>
-    </details>
+  <!-- Download, over a colonnade -->
+  <section class="section section-art" id="download" aria-labelledby="download-title">
+    <div class="section-bg" style="background-image: url(assets/bg/columns.webp)" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Choose your platform</p>
+        <h2 id="download-title" class="title">Install</h2>
+        <p class="section-lede">The desktop app sets itself up on first start, a few minutes once, then opens in
+          seconds. The command line installs into your home folder and needs no administrator rights.</p>
+      </div>
+      <div class="arcade">
+        <article class="arch" id="windows">
+          <div class="arch-inner">
+            <p class="arch-tag">Windows 10 and 11</p>
+            <h3>Windows</h3>
+            <p class="arch-meta">Installer (.exe) or .msi</p>
+            <a class="btn btn-icon" data-release="windows" href="https://github.com/ShadyMayez/vixana-website/releases/latest"><span class="btn-glyph" aria-hidden="true">↓</span><span class="btn-label">Download</span></a>
+          </div>
+        </article>
+        <article class="arch" id="linux">
+          <div class="arch-inner">
+            <p class="arch-tag">Any distribution</p>
+            <h3>Linux</h3>
+            <p class="arch-meta">AppImage, .deb or .rpm</p>
+            <a class="btn btn-icon" data-release="linux" href="https://github.com/ShadyMayez/vixana-website/releases/latest"><span class="btn-glyph" aria-hidden="true">↓</span><span class="btn-label">Download</span></a>
+          </div>
+        </article>
+        <article class="arch arch-terminal" id="terminal">
+          <div class="arch-inner">
+            <p class="arch-tag">Linux, macOS, Windows</p>
+            <h3>Terminal</h3>
+            <div class="tabs" role="tablist" aria-label="Your system">
+              <button role="tab" id="tab-unix" aria-selected="true" aria-controls="cmd-unix">Linux / macOS</button>
+              <button role="tab" id="tab-win" aria-selected="false" aria-controls="cmd-win" tabindex="-1">Windows</button>
+            </div>
+            <div class="cmd" id="cmd-unix" role="tabpanel" aria-labelledby="tab-unix">
+              <code data-cmd="unix">curl -fsSL https://vixana.is-a.dev/install.sh | sh</code>
+              <button class="copy" type="button" data-copy="unix">Copy</button>
+            </div>
+            <div class="cmd" id="cmd-win" role="tabpanel" aria-labelledby="tab-win" hidden>
+              <code data-cmd="win">irm https://vixana.is-a.dev/install.ps1 | iex</code>
+              <button class="copy" type="button" data-copy="win">Copy</button>
+            </div>
+            <p class="arch-meta">Then run <code>vixana</code>.</p>
+          </div>
+        </article>
+      </div>
+      <p class="fine">Installers are not code-signed yet, so Windows SmartScreen may ask you to confirm. Read
+        <a data-repo-path="website/install.sh" href="install.sh">install.sh</a> or
+        <a data-repo-path="website/install.ps1" href="install.ps1">install.ps1</a> before you run them.</p>
+    </div>
+  </section>
+
+  <!-- Questions -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap wrap-narrow">
+      <div class="section-head">
+        <p class="kicker">Questions</p>
+        <h2 id="faq-title" class="title">Before you start</h2>
+      </div>
+      <details>
+        <summary>Does my data leave my computer?</summary>
+        <p>No. The desktop app and the command line train on your machine. The network is used only to install the
+          engine's packages the first time and to sign in with Google.</p>
+      </details>
+      <details>
+        <summary>Is Vixana free?</summary>
+        <p>Yes, for noncommercial use: personal projects, research, study and teaching, under the PolyForm Noncommercial
+          License 1.0.0. For commercial use, contact the author.</p>
+      </details>
+      <details>
+        <summary>Do I need a graphics card?</summary>
+        <p>No. The CPU engine runs anywhere. The GPU engine needs an NVIDIA card with 4 GB or more.</p>
+      </details>
+      <details>
+        <summary>Is there a Mac app?</summary>
+        <p>Not yet. On a Mac, install the command line with the terminal command above; it runs the CPU engine.</p>
+      </details>
+      <details>
+        <summary>What can it predict?</summary>
+        <p>A column in a table: a category (churn or not, which product, which diagnosis) or a number (price, demand,
+          time). It reads CSV, TSV, Excel, Parquet, Feather and JSON files, and was tested on tables from 100 to
+          100,000 rows.</p>
+      </details>
+      <details>
+        <summary>Why do I sign in with Google?</summary>
+        <p>So the app knows who you are. Vixana receives your name, email address and picture, and nothing else from
+          your Google account. See the <a href="privacy.html">privacy policy</a>.</p>
+      </details>
+    </div>
   </section>
 </main>
 
@@ -228,8 +277,8 @@
   <img class="foot-mark" src="assets/img/wordmark.svg" alt="Vixana" width="908" height="240" loading="lazy">
   <nav aria-label="Footer">
     <a href="#download">Download</a>
-    <a data-repo href="https://github.com/ShadyMayez/vixana-website">Source</a>
-    <a data-repo-path="LICENSE.md" href="https://github.com/ShadyMayez/vixana-v6/blob/main/LICENSE.md">Licence</a>
+    <a data-repo href="https://github.com/ShadyMayez/vixana-website">GitHub</a>
+    <a data-repo-path="LICENSE.md" href="LICENSE.md">Licence</a>
     <a href="privacy.html">Privacy</a>
     <a href="terms.html">Terms</a>
   </nav>
@@ -238,6 +287,6 @@
     domain (CC0), redrawn as engravings.</p>
 </footer>
 
-<script src="site.js?v=6.0.0-9" defer></script>
+<script src="site.js?v=6.1.0-1" defer></script>
 </body>
 </html>
