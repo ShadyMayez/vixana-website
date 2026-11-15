@@ -9,7 +9,7 @@
 # To remove Vixana: delete %LOCALAPPDATA%\Vixana\cli, %LOCALAPPDATA%\Vixana\venvs\cli and %LOCALAPPDATA%\Vixana\bin,
 # and remove that bin folder from your user PATH.
 #
-# Settings (environment variables): VIXANA_VERSION (default 6.0.0), VIXANA_SOURCE (a .zip URL or a local folder;
+# Settings (environment variables): VIXANA_VERSION (default 6.0.1), VIXANA_SOURCE (a .zip URL or a local folder;
 # default that release's vixana-cli-<version>.zip from github.com/ShadyMayez/vixana-website/releases),
 # VIXANA_HOME (default %LOCALAPPDATA%\Vixana), VIXANA_PYTHON (path to python.exe 3.11-3.13).
 
@@ -19,7 +19,7 @@ $ProgressPreference = "SilentlyContinue"   # Invoke-WebRequest is very slow with
 function Stop-Install([string]$message) { Write-Host "Vixana install stopped: $message" -ForegroundColor Red; throw $message }
 
 $releases = "https://github.com/ShadyMayez/vixana-website/releases"
-$version = if ($env:VIXANA_VERSION) { $env:VIXANA_VERSION } else { "6.0.0" }
+$version = if ($env:VIXANA_VERSION) { $env:VIXANA_VERSION } else { "6.0.1" }
 $source = if ($env:VIXANA_SOURCE) { $env:VIXANA_SOURCE } else { "$releases/download/v$version/vixana-cli-$version.zip" }
 $vhome = if ($env:VIXANA_HOME) { $env:VIXANA_HOME } else { Join-Path $env:LOCALAPPDATA "Vixana" }
 $app = Join-Path $vhome "cli"

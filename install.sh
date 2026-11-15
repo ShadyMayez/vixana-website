@@ -10,7 +10,7 @@
 # To remove Vixana: rm -rf ~/.local/share/vixana/cli ~/.local/share/vixana/venvs/cli ~/.local/bin/vixana
 #
 # Settings (environment variables):
-#   VIXANA_VERSION  the release to install (default: 6.0.0)
+#   VIXANA_VERSION  the release to install (default: 6.0.1)
 #   VIXANA_SOURCE   a .tar.gz URL or a local folder with the Vixana source (default: that release's
 #                   vixana-cli-<version>.tar.gz from github.com/ShadyMayez/vixana-website/releases)
 #   VIXANA_HOME     where Vixana keeps its files (default: ~/.local/share/vixana)
@@ -20,7 +20,7 @@
 set -eu
 
 RELEASES="https://github.com/ShadyMayez/vixana-website/releases"
-VERSION="${VIXANA_VERSION:-6.0.0}"
+VERSION="${VIXANA_VERSION:-6.0.1}"
 SOURCE="${VIXANA_SOURCE:-$RELEASES/download/v$VERSION/vixana-cli-$VERSION.tar.gz}"
 VHOME="${VIXANA_HOME:-$HOME/.local/share/vixana}"
 APP="$VHOME/cli"
