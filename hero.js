@@ -17,7 +17,7 @@
 
   // timeline, seconds from the start of the CSS sequence
   var DRAW_FROM = 0.15, DRAW_SPREAD = 1.0, DRAW_TIME = 1.35; // each line draws itself in, staggered
-  var DIM_AT = 3.0, DIM_TIME = 1.6, DIM_TO = 0.2;              // then the lines outside the V step back
+  var DIM_AT = 3.0, DIM_TIME = 1.6, DIM_TO = 0.32;             // then the lines outside the V step back
   var PULSES_AT = 3.3;                                          // and light starts to travel along them
 
   var W = 0, H = 0, lines = [], pulses = [], P = { x: 0, y: 0 }, glow = 0;
