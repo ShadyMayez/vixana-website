@@ -10,17 +10,18 @@
 # To remove Vixana: rm -rf ~/.local/share/vixana/cli ~/.local/share/vixana/venvs/cli ~/.local/bin/vixana
 #
 # Settings (environment variables):
-#   VIXANA_SOURCE   a .tar.gz URL or a local folder with the Vixana source (default: GitHub, branch VIXANA_REF)
-#   VIXANA_REF      branch or tag to install from GitHub (default: main)
+#   VIXANA_VERSION  the release to install (default: 6.0.0)
+#   VIXANA_SOURCE   a .tar.gz URL or a local folder with the Vixana source (default: that release's
+#                   vixana-cli-<version>.tar.gz from github.com/ShadyMayez/vixana-website/releases)
 #   VIXANA_HOME     where Vixana keeps its files (default: ~/.local/share/vixana)
 #   VIXANA_BIN_DIR  where the `vixana` command goes (default: ~/.local/bin)
 #   VIXANA_PYTHON   the Python to build the environment with (default: the first of python3.12, 3.13, 3.11)
 
 set -eu
 
-REPO="https://github.com/ShadyMayez/vixana-v6"
-REF="${VIXANA_REF:-main}"
-SOURCE="${VIXANA_SOURCE:-$REPO/archive/refs/heads/$REF.tar.gz}"
+RELEASES="https://github.com/ShadyMayez/vixana-website/releases"
+VERSION="${VIXANA_VERSION:-6.0.0}"
+SOURCE="${VIXANA_SOURCE:-$RELEASES/download/v$VERSION/vixana-cli-$VERSION.tar.gz}"
 VHOME="${VIXANA_HOME:-$HOME/.local/share/vixana}"
 APP="$VHOME/cli"
 VENV="$VHOME/venvs/cli"

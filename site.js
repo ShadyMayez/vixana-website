@@ -6,7 +6,13 @@
 
   // Where the install scripts live: this site when it is served over http(s), else the public address.
   var PUBLIC_SITE = "https://vixana.is-a.dev";
-  var REPO = "https://github.com/ShadyMayez/vixana-v6";
+  var REPO = "https://github.com/ShadyMayez/vixana-v6";            // the source (private for now)
+  var PUBLIC_REPO = "https://github.com/ShadyMayez/vixana-website";  // the site and the downloads
+  var RELEASE = PUBLIC_REPO + "/releases/latest";
+  var DOWNLOADS = {                                                  // direct links where one file fits
+    windows: RELEASE + "/download/Vixana_6.0.0_x64-setup.exe",
+    linux: RELEASE,                                                  // AppImage, .deb or .rpm: let them choose
+  };
   // the folder this page is served from, so a site under a path (user.github.io/vixana-website/) works too
   var site = /^https?:$/.test(location.protocol)
     ? (location.origin + location.pathname.replace(/[^/]*$/, "")).replace(/\/$/, "")
@@ -19,10 +25,15 @@
   document.querySelectorAll("[data-cmd]").forEach(function (el) {
     el.textContent = commands[el.getAttribute("data-cmd")];
   });
-  document.querySelectorAll("[data-repo]").forEach(function (a) { a.href = REPO; });
-  document.querySelectorAll("[data-release]").forEach(function (a) { a.href = REPO + "/releases/latest"; });
+  document.querySelectorAll("[data-repo]").forEach(function (a) { a.href = PUBLIC_REPO; });
+  document.querySelectorAll("[data-release]").forEach(function (a) {
+    a.href = DOWNLOADS[a.getAttribute("data-release")] || RELEASE;
+  });
+  // files the public site repository also has are linked there; the rest live in the source repository
+  var PUBLIC_FILES = { "LICENSE.md": "LICENSE.md", "website/install.sh": "install.sh", "website/install.ps1": "install.ps1" };
   document.querySelectorAll("[data-repo-path]").forEach(function (a) {
-    a.href = REPO + "/blob/main/" + a.getAttribute("data-repo-path");
+    var path = a.getAttribute("data-repo-path");
+    a.href = PUBLIC_FILES[path] ? PUBLIC_REPO + "/blob/main/" + PUBLIC_FILES[path] : REPO + "/blob/main/" + path;
   });
 
   // The hero's download button names the visitor's system.

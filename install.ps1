@@ -9,17 +9,18 @@
 # To remove Vixana: delete %LOCALAPPDATA%\Vixana\cli, %LOCALAPPDATA%\Vixana\venvs\cli and %LOCALAPPDATA%\Vixana\bin,
 # and remove that bin folder from your user PATH.
 #
-# Settings (environment variables): VIXANA_SOURCE (a .zip URL or a local folder), VIXANA_REF (GitHub branch or
-# tag, default main), VIXANA_HOME (default %LOCALAPPDATA%\Vixana), VIXANA_PYTHON (path to python.exe 3.11-3.13).
+# Settings (environment variables): VIXANA_VERSION (default 6.0.0), VIXANA_SOURCE (a .zip URL or a local folder;
+# default that release's vixana-cli-<version>.zip from github.com/ShadyMayez/vixana-website/releases),
+# VIXANA_HOME (default %LOCALAPPDATA%\Vixana), VIXANA_PYTHON (path to python.exe 3.11-3.13).
 
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"   # Invoke-WebRequest is very slow with the progress bar on 5.1
 
 function Stop-Install([string]$message) { Write-Host "Vixana install stopped: $message" -ForegroundColor Red; throw $message }
 
-$repo = "https://github.com/ShadyMayez/vixana-v6"
-$ref = if ($env:VIXANA_REF) { $env:VIXANA_REF } else { "main" }
-$source = if ($env:VIXANA_SOURCE) { $env:VIXANA_SOURCE } else { "$repo/archive/refs/heads/$ref.zip" }
+$releases = "https://github.com/ShadyMayez/vixana-website/releases"
+$version = if ($env:VIXANA_VERSION) { $env:VIXANA_VERSION } else { "6.0.0" }
+$source = if ($env:VIXANA_SOURCE) { $env:VIXANA_SOURCE } else { "$releases/download/v$version/vixana-cli-$version.zip" }
 $vhome = if ($env:VIXANA_HOME) { $env:VIXANA_HOME } else { Join-Path $env:LOCALAPPDATA "Vixana" }
 $app = Join-Path $vhome "cli"
 $venv = Join-Path $vhome "venvs\cli"
