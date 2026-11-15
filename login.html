@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in — Vixana</title>
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=6.4.0-2">
+</head>
+<body>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="bar-brand" href="./" aria-label="Vixana home">
+      <img src="assets/img/statement.svg" alt="Vixana" width="754" height="100">
+    </a>
+    <a class="btn btn-small" href="./#download">Download</a>
+  </div>
+</header>
+<main class="auth" id="login">
+  <div class="auth-card">
+    <h1 class="auth-title">Sign in</h1>
+
+    <div id="signin" hidden>
+      <p class="auth-lede" id="signin-why">One Vixana account for this website and the <code>vixana</code> command line.</p>
+      <div class="auth-google" id="google-button"></div>
+      <form id="dev-signin" class="auth-dev" hidden>
+        <label for="dev-email">Test sign-in (local server only)</label>
+        <div class="auth-row">
+          <input id="dev-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+          <button class="btn btn-small" type="submit">Sign in</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="approve" hidden>
+      <p class="auth-lede">A command line is asking to sign in as <strong id="approve-user"></strong>.</p>
+      <dl class="auth-facts">
+        <div><dt>Code</dt><dd id="approve-code" class="auth-code"></dd></div>
+        <div><dt>From</dt><dd id="approve-label"></dd></div>
+      </dl>
+      <p class="auth-warn">Allow it only if you just ran <code>vixana login</code> yourself and your terminal shows the
+        same code. Someone who sends you this link could otherwise use your account.</p>
+      <div class="auth-actions">
+        <button class="btn" id="allow" type="button">Allow</button>
+        <button class="btn btn-ghost" id="deny" type="button">Refuse</button>
+      </div>
+    </div>
+
+    <p class="auth-done" id="login-done" role="status" hidden></p>
+    <p class="auth-error" id="login-error" role="alert" hidden></p>
+  </div>
+  <p class="auth-fine">By signing in you agree to the <a href="terms.html">terms</a>. See how your details are kept in the
+    <a href="privacy.html">privacy policy</a>.</p>
+</main>
+<script src="account.js?v=6.4.0-1" defer></script>
+</body>
+</html>

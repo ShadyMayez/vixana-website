@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account — Vixana</title>
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=6.4.0-2">
+</head>
+<body>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="bar-brand" href="./" aria-label="Vixana home">
+      <img src="assets/img/statement.svg" alt="Vixana" width="754" height="100">
+    </a>
+    <a class="btn btn-small" href="./#download">Download</a>
+  </div>
+</header>
+<main class="auth" id="account">
+  <div class="auth-card" id="account-body" hidden>
+    <div class="auth-who">
+      <img id="account-picture" alt="" width="56" height="56" referrerpolicy="no-referrer" hidden>
+      <div>
+        <h1 class="auth-title" id="account-name"></h1>
+        <p class="auth-email" id="account-email"></p>
+      </div>
+    </div>
+    <h2 class="auth-sub">Linked command lines</h2>
+    <ul class="auth-apps" id="account-apps"></ul>
+    <p class="auth-lede">To link another computer, run <code>vixana login</code> there.</p>
+    <div class="auth-actions">
+      <a class="btn" href="./#download">Download</a>
+      <button class="btn btn-ghost" id="signout" type="button">Sign out</button>
+    </div>
+  </div>
+</main>
+<script src="account.js?v=6.4.0-1" defer></script>
+</body>
+</html>

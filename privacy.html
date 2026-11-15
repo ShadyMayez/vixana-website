@@ -6,7 +6,7 @@
 <title>Privacy — Vixana</title>
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css?v=6.3.0-1">
+<link rel="stylesheet" href="styles.css?v=6.4.0-2">
 </head>
 <body>
 <header class="bar">
@@ -15,6 +15,7 @@
       <img src="assets/img/statement.svg" alt="Vixana" width="754" height="100">
       <span class="bar-tag">AutoML for your own models</span>
     </a>
+    <a class="bar-signin" href="login.html" data-account-link hidden>Sign in</a>
     <a class="btn btn-small" href="./#download">Download</a>
   </div>
 </header>
@@ -36,11 +37,21 @@
   <p>If someone runs a shared Vixana server and you sign in there, that server stores the same details and a session,
     and its operator is responsible for them.</p>
 
+  <h2>Your Vixana account</h2>
+  <p>When you sign in on this website, or link the <code>vixana</code> command line to your account with
+    <code>vixana login</code>, the Vixana accounts service keeps your Google account ID, name, email address and
+    picture, the time you signed up and last signed in, and a list of the command lines you linked (the computer's name
+    and when). It keeps sign-in tokens only as one-way hashes. This service runs on Cloudflare Workers, and Cloudflare
+    processes it as described in the <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy
+    Policy</a>. It does not receive your data, models or predictions; they stay on your computer.</p>
+  <p>This website keeps your sign-in in your browser's local storage (not a cookie) until you sign out or it ends after
+    30 days. To delete your account, open an issue at the address below or email the owner, and it will be removed.</p>
+
   <h2>Network use</h2>
   <ul>
     <li>On first start, the app and the install scripts download Vixana's Python packages from PyPI and PyTorch's
       package index, and the command-line installer downloads Vixana from GitHub.</li>
-    <li>Signing in contacts Google to confirm who you are.</li>
+    <li>Signing in contacts Google to confirm who you are, and the Vixana accounts service when you use a Vixana account.</li>
     <li>Vixana has no analytics, tracking or advertising, and it sets no cookies on this website.</li>
   </ul>
 
@@ -62,5 +73,6 @@
   <nav aria-label="Footer"><a href="./">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
   <p>Copyright 2026 Shady Mayez. Free for noncommercial use.</p>
 </footer>
+<script src="account.js?v=6.4.0-1" defer></script>
 </body>
 </html>
