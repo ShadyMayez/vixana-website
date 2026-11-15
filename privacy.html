@@ -41,11 +41,10 @@
   <p>When you sign in on this website, or link the <code>vixana</code> command line to your account with
     <code>vixana login</code>, the Vixana accounts service keeps your Google account ID, name, email address and
     picture, the time you signed up and last signed in, and a list of the command lines you linked (the computer's name
-    and when). It keeps sign-in tokens only as one-way hashes. This service runs on Cloudflare Workers, and Cloudflare
-    processes it as described in the <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy
-    Policy</a>. It does not receive your data, models or predictions; they stay on your computer.</p>
-  <p>This website keeps your sign-in in your browser's local storage (not a cookie) until you sign out or it ends after
-    30 days. To delete your account, open an issue at the address below or email the owner, and it will be removed.</p>
+    and when). It keeps the command line's sign-in tokens only as one-way hashes. This service runs on Supabase
+    (servers in Frankfurt, Germany), which processes it as described in the
+    <a href="https://supabase.com/privacy">Supabase Privacy Policy</a>. It does not receive your data, models or predictions; they stay on your computer.</p>
+  <p>This website keeps your sign-in in your browser's local storage (not a cookie) until you sign out. To delete your account, open an issue at the address below or email the owner, and it will be removed.</p>
 
   <h2>Network use</h2>
   <ul>
@@ -73,6 +72,6 @@
   <nav aria-label="Footer"><a href="./">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
   <p>Copyright 2026 Shady Mayez. Free for noncommercial use.</p>
 </footer>
-<script src="account.js?v=6.4.0-1" defer></script>
+<script src="account.js?v=6.5.0-2" defer></script>
 </body>
 </html>

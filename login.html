@@ -24,14 +24,7 @@
 
     <div id="signin" hidden>
       <p class="auth-lede" id="signin-why">One Vixana account for this website and the <code>vixana</code> command line.</p>
-      <div class="auth-google" id="google-button"></div>
-      <form id="dev-signin" class="auth-dev" hidden>
-        <label for="dev-email">Test sign-in (local server only)</label>
-        <div class="auth-row">
-          <input id="dev-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
-          <button class="btn btn-small" type="submit">Sign in</button>
-        </div>
-      </form>
+      <button class="btn btn-google" id="google" type="button"><span class="btn-glyph" aria-hidden="true">G</span><span class="btn-label">Continue with Google</span></button>
     </div>
 
     <div id="approve" hidden>
@@ -54,6 +47,6 @@
   <p class="auth-fine">By signing in you agree to the <a href="terms.html">terms</a>. See how your details are kept in the
     <a href="privacy.html">privacy policy</a>.</p>
 </main>
-<script src="account.js?v=6.4.0-1" defer></script>
+<script src="account.js?v=6.5.0-2" defer></script>
 </body>
 </html>
