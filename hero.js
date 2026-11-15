@@ -21,6 +21,7 @@
   var PULSES_AT = 3.3;                                          // and light starts to travel along them
 
   var W = 0, H = 0, lines = [], pulses = [], P = { x: 0, y: 0 }, glow = 0;
+  var pointer = null, inside = false, lamp = 0; // the visitor's pointer, and how far its light has come up
   var t0 = null, last = 0, raf = 0, visible = true;
 
   function random(seed) { // a fixed sequence, so the picture is the same on every visit
@@ -116,6 +117,16 @@
       }
     }
     if (!motion || t < PULSES_AT) return;
+    // the pointer carries a soft light: the lines near it brighten
+    lamp += ((inside ? 1 : 0) - lamp) * Math.min(1, dt * 4);
+    if (lamp > 0.01 && pointer) {
+      var lg = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 220);
+      lg.addColorStop(0, "rgba(255,255,255," + (0.75 * lamp).toFixed(3) + ")");
+      lg.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.strokeStyle = lg;
+      ctx.lineWidth = 1;
+      for (var m = 0; m < lines.length; m++) strokeTo(lines[m], lines[m].len);
+    }
     // light travelling into the V
     if (pulses.length < 26 && Math.random() < dt * 9) {
       pulses.push({ line: lines[(Math.random() * lines.length) | 0], s: 0, speed: 0.34 + Math.random() * 0.22 });
@@ -177,6 +188,16 @@
   if (window.ResizeObserver) new ResizeObserver(relayout).observe(hero);
   else window.addEventListener("resize", relayout);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+
+  // the pointer's light, for mouse and pen (a finger has no hover)
+  if (motion && window.matchMedia("(hover: hover)").matches) {
+    hero.addEventListener("pointermove", function (e) {
+      var r = hero.getBoundingClientRect();
+      pointer = { x: e.clientX - r.left, y: e.clientY - r.top };
+      inside = true;
+    });
+    hero.addEventListener("pointerleave", function () { inside = false; });
+  }
 
   // rest when the hero is off the screen or the tab is hidden
   function setVisible(v) {
