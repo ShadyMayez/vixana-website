@@ -10,7 +10,7 @@
 # To remove Vixana: rm -rf ~/.local/share/vixana/cli ~/.local/share/vixana/venvs/cli ~/.local/bin/vixana
 #
 # Settings (environment variables):
-#   VIXANA_VERSION  the release to install (default: 6.1.0)
+#   VIXANA_VERSION  the release to install (default: 6.1.1)
 #   VIXANA_SOURCE   a .tar.gz URL or a local folder with the Vixana source (default: that release's
 #                   vixana-cli-<version>.tar.gz from github.com/ShadyMayez/vixana-website/releases)
 #   VIXANA_HOME     where Vixana keeps its files (default: ~/.local/share/vixana)
@@ -20,7 +20,7 @@
 set -eu
 
 RELEASES="https://github.com/ShadyMayez/vixana-website/releases"
-VERSION="${VIXANA_VERSION:-6.1.0}"
+VERSION="${VIXANA_VERSION:-6.1.1}"
 SOURCE="${VIXANA_SOURCE:-$RELEASES/download/v$VERSION/vixana-cli-$VERSION.tar.gz}"
 VHOME="${VIXANA_HOME:-$HOME/.local/share/vixana}"
 APP="$VHOME/cli"
@@ -77,6 +77,9 @@ mkdir -p "$NEW/docs/release" "$NEW/docs/research" "$NEW/requirements"
 for d in backend vixana_cli; do
   cp -R "$SRC/$d" "$NEW/$d"
 done
+# a local checkout may hold its own runs and databases: never copy them into an install
+rm -rf "$NEW/backend/outputs" "$NEW/backend/data" "$NEW/backend/mlruns"
+find "$NEW" -name __pycache__ -type d -prune -exec rm -rf {} +
 cp "$SRC/docs/release/v6.0.0_freeze.json" "$NEW/docs/release/"
 for n in amlb_unseen_options core_v5_7_freeze core_v5_7_1_freeze core_v5_7_1_final_freeze v5_2_portfolio \
          vs_autogluon_v2_options core_g1_final_freeze; do

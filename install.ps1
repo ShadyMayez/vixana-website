@@ -9,7 +9,7 @@
 # To remove Vixana: delete %LOCALAPPDATA%\Vixana\cli, %LOCALAPPDATA%\Vixana\venvs\cli and %LOCALAPPDATA%\Vixana\bin,
 # and remove that bin folder from your user PATH.
 #
-# Settings (environment variables): VIXANA_VERSION (default 6.1.0), VIXANA_SOURCE (a .zip URL or a local folder;
+# Settings (environment variables): VIXANA_VERSION (default 6.1.1), VIXANA_SOURCE (a .zip URL or a local folder;
 # default that release's vixana-cli-<version>.zip from github.com/ShadyMayez/vixana-website/releases),
 # VIXANA_HOME (default %LOCALAPPDATA%\Vixana), VIXANA_PYTHON (path to python.exe 3.11-3.13).
 
@@ -19,7 +19,7 @@ $ProgressPreference = "SilentlyContinue"   # Invoke-WebRequest is very slow with
 function Stop-Install([string]$message) { Write-Host "Vixana install stopped: $message" -ForegroundColor Red; throw $message }
 
 $releases = "https://github.com/ShadyMayez/vixana-website/releases"
-$version = if ($env:VIXANA_VERSION) { $env:VIXANA_VERSION } else { "6.1.0" }
+$version = if ($env:VIXANA_VERSION) { $env:VIXANA_VERSION } else { "6.1.1" }
 $source = if ($env:VIXANA_SOURCE) { $env:VIXANA_SOURCE } else { "$releases/download/v$version/vixana-cli-$version.zip" }
 $vhome = if ($env:VIXANA_HOME) { $env:VIXANA_HOME } else { Join-Path $env:LOCALAPPDATA "Vixana" }
 $app = Join-Path $vhome "cli"
@@ -76,6 +76,11 @@ try {
     if (Test-Path $new) { Remove-Item -Recurse -Force $new }
     New-Item -ItemType Directory -Force -Path "$new\docs\release", "$new\docs\research", "$new\requirements" | Out-Null
     foreach ($d in "backend", "vixana_cli") { Copy-Item -Recurse (Join-Path $src $d) (Join-Path $new $d) }
+    # a local checkout may hold its own runs and databases: never copy them into an install
+    foreach ($d in "outputs", "data", "mlruns") {
+        $p = Join-Path $new "backend\$d"
+        if (Test-Path $p) { Remove-Item -Recurse -Force $p }
+    }
     Copy-Item (Join-Path $src "docs\release\v6.0.0_freeze.json") "$new\docs\release\"
     foreach ($n in "amlb_unseen_options", "core_v5_7_freeze", "core_v5_7_1_freeze", "core_v5_7_1_final_freeze",
                    "v5_2_portfolio", "vs_autogluon_v2_options", "core_g1_final_freeze") {
