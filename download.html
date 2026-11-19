@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download — Vixana</title>
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=6.6.0-1">
+</head>
+<body>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="bar-brand" href="./" aria-label="Vixana home">
+      <img src="assets/img/statement.svg" alt="Vixana" width="754" height="100">
+    </a>
+    <a class="btn btn-small" href="./#download">All downloads</a>
+  </div>
+</header>
+<main class="auth" id="download-page">
+  <div class="auth-card">
+    <h1 class="auth-title">Download</h1>
+    <dl class="auth-facts" id="dl-facts" hidden>
+      <div><dt>File</dt><dd id="dl-file"></dd></div>
+      <div id="dl-from-row" hidden><dt>For</dt><dd id="dl-from"></dd></div>
+      <div id="dl-code-row" hidden><dt>Code</dt><dd id="dl-code" class="auth-code"></dd></div>
+    </dl>
+
+    <div id="dl-signin" hidden>
+      <p class="auth-lede">Each Vixana download is approved by its owner. Sign in so the owner knows who is asking.</p>
+      <button class="btn btn-google" id="dl-google" type="button"><span class="btn-glyph" aria-hidden="true">G</span><span class="btn-label">Continue with Google</span></button>
+    </div>
+
+    <div id="dl-ask" hidden>
+      <p class="auth-lede">This download needs the owner's approval. Ask for it, then send the email that opens. You
+        can download here once it is approved; each approval is good for one download.</p>
+      <button class="btn" id="dl-ask-btn" type="button">Ask for approval</button>
+    </div>
+
+    <div id="dl-sent" hidden>
+      <p class="auth-lede">Your request is waiting for the owner. Send the email if you have not yet, then come back to
+        this page; it checks again on its own.</p>
+      <div class="auth-actions">
+        <a class="btn" id="dl-gmail" target="_blank" rel="noopener">Email with Gmail</a>
+        <a class="btn btn-ghost" id="dl-mailto">Use mail app</a>
+      </div>
+    </div>
+
+    <p class="auth-lede" id="dl-denied" hidden>The owner did not approve this request. You can ask again.</p>
+
+    <div id="dl-ready" hidden>
+      <p class="auth-lede">Approved. Your download is ready; it uses this approval.</p>
+      <button class="btn btn-icon" id="dl-get" type="button"><span class="btn-glyph" aria-hidden="true">↓</span><span class="btn-label">Download</span></button>
+    </div>
+
+    <div id="dl-allow" hidden>
+      <p class="auth-lede">Approved. Allow the install command that is waiting in your terminal? It uses this approval.</p>
+      <p class="auth-warn">Allow it only if you just ran the install command yourself and your terminal shows the same
+        code.</p>
+      <div class="auth-actions">
+        <button class="btn" id="dl-allow-btn" type="button">Allow</button>
+        <button class="btn btn-ghost" id="dl-refuse-btn" type="button">Refuse</button>
+      </div>
+    </div>
+
+    <p class="auth-done" id="dl-done" role="status" hidden></p>
+    <p class="auth-error" id="dl-error" role="alert" hidden></p>
+  </div>
+  <p class="auth-fine">By signing in you agree to the <a href="terms.html">terms</a>. See how your details are kept in the
+    <a href="privacy.html">privacy policy</a>.</p>
+</main>
+<script src="account.js?v=6.6.0-1" defer></script>
+</body>
+</html>

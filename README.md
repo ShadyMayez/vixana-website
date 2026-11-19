@@ -1,6 +1,6 @@
 # Vixana website
 
-The website of [Vixana](https://vixana.is-a.dev), a local-first AutoML tool: desktop app for Linux and Windows,
+The website of [Vixana](https://vixana.online), a local-first AutoML tool: desktop app for Linux and Windows,
 and a command line for Linux, macOS and Windows.
 
 This repository holds only the published site. It is generated from the `website/` folder of the main Vixana

@@ -4,24 +4,26 @@
 #   curl -fsSL https://YOUR-SITE/install.sh | sh
 #
 # What it does, all inside your home folder (no sudo):
-#   1. downloads Vixana's source (or copies it from VIXANA_SOURCE),
+#   1. downloads Vixana's source once the owner approves it (or copies it from VIXANA_SOURCE): it shows a link and a
+#      code; you sign in on the website with Google, ask for approval if you have none, and allow this install,
 #   2. makes a Python environment with the CPU engine's packages,
 #   3. adds a `vixana` command to ~/.local/bin.
 # To remove Vixana: rm -rf ~/.local/share/vixana/cli ~/.local/share/vixana/venvs/cli ~/.local/bin/vixana
 #
 # Settings (environment variables):
-#   VIXANA_VERSION  the release to install (default: 6.1.1)
+#   VIXANA_VERSION  the release to install (default: 6.2.0)
 #   VIXANA_SOURCE   a .tar.gz URL or a local folder with the Vixana source (default: that release's
-#                   vixana-cli-<version>.tar.gz from github.com/ShadyMayez/vixana-website/releases)
+#                   vixana-cli-<version>.tar.gz, after the owner's approval)
+#   VIXANA_ACCOUNTS the Vixana accounts server (default: the project's Supabase function)
 #   VIXANA_HOME     where Vixana keeps its files (default: ~/.local/share/vixana)
 #   VIXANA_BIN_DIR  where the `vixana` command goes (default: ~/.local/bin)
 #   VIXANA_PYTHON   the Python to build the environment with (default: the first of python3.12, 3.13, 3.11)
 
 set -eu
 
-RELEASES="https://github.com/ShadyMayez/vixana-website/releases"
-VERSION="${VIXANA_VERSION:-6.1.1}"
-SOURCE="${VIXANA_SOURCE:-$RELEASES/download/v$VERSION/vixana-cli-$VERSION.tar.gz}"
+VERSION="${VIXANA_VERSION:-6.2.0}"
+SOURCE="${VIXANA_SOURCE:-}"
+ACCOUNTS="${VIXANA_ACCOUNTS:-https://atwozbhkjbuvqzdbpgam.supabase.co/functions/v1/accounts}"
 VHOME="${VIXANA_HOME:-$HOME/.local/share/vixana}"
 APP="$VHOME/cli"
 VENV="$VHOME/venvs/cli"
@@ -49,20 +51,63 @@ if [ -z "$PY" ]; then
   fi
 fi
 
+# ---- the owner's approval (docs/release/DOWNLOADS.md) ----
+if command -v curl >/dev/null 2>&1; then HAVE=curl
+elif command -v wget >/dev/null 2>&1; then HAVE=wget
+else fail "needs curl or wget to download Vixana"; fi
+post() {  # post PATH JSON -> the server's answer
+  if [ "$HAVE" = curl ]; then
+    curl -sS -X POST -H 'content-type: application/json' --data "$2" "$ACCOUNTS$1"
+  else
+    wget -qO- --header='content-type: application/json' --post-data="$2" "$ACCOUNTS$1"
+  fi
+}
+jget() { printf '%s' "$1" | sed -n "s/.*\"$2\"[[:space:]]*:[[:space:]]*\"\([^\"]*\)\".*/\1/p"; }
+approved_link() {
+  file="vixana-cli-$VERSION.tar.gz"
+  host="$(hostname 2>/dev/null | tr -cd 'A-Za-z0-9._-' | cut -c1-60)"
+  start="$(post /api/install/start "{\"file\":\"$file\",\"tag\":\"v$VERSION\",\"label\":\"install.sh on ${host:-this computer}\"}")" \
+    || fail "could not reach the Vixana server"
+  code="$(jget "$start" code)"; secret="$(jget "$start" device_secret)"; link="$(jget "$start" verification_url)"
+  [ -n "$code" ] && [ -n "$secret" ] || fail "the Vixana server said: $(jget "$start" error)"
+  say ""
+  say "Every Vixana download is approved by its owner. To continue:"
+  say "  1. Open $link"
+  say "  2. Sign in with Google and check that the page shows the code $code"
+  say "  3. If you have no approval yet, press Ask for approval there and send the email"
+  say "  4. Once approved, press Allow. This window waits up to an hour."
+  say ""
+  for opener in xdg-open open; do
+    if command -v "$opener" >/dev/null 2>&1; then "$opener" "$link" >/dev/null 2>&1 & break; fi
+  done
+  waited=0
+  while [ "$waited" -lt 3600 ]; do
+    sleep 3; waited=$((waited + 3))
+    answer="$(post /api/install/poll "{\"device_secret\":\"$secret\"}")" || continue
+    case "$(jget "$answer" status)" in
+      ready) LINK="$(jget "$answer" url)"; [ -n "$LINK" ] && return 0; fail "the server gave no download link" ;;
+      denied) fail "the install was refused on the website" ;;
+      expired) fail "the code expired; run the install command again" ;;
+      pending) if [ $((waited % 60)) -eq 0 ]; then say "  still waiting for approval ($((waited / 60)) min)"; fi ;;
+      *) fail "the Vixana server said: $(jget "$answer" error)" ;;
+    esac
+  done
+  fail "no approval within an hour; run the install command again"
+}
+
 # ---- source ----
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT INT TERM
-if [ -d "$SOURCE" ]; then
+if [ -n "$SOURCE" ] && [ -d "$SOURCE" ]; then
   say "Copying the source from $SOURCE"
   SRC="$(cd "$SOURCE" && pwd)"
 else
+  if [ -n "$SOURCE" ]; then LINK="$SOURCE"; else approved_link; SOURCE="vixana-cli-$VERSION.tar.gz"; fi
   say "Downloading $SOURCE"
-  if command -v curl >/dev/null 2>&1; then
-    curl -fsSL "$SOURCE" -o "$TMP/src.tar.gz" || fail "could not download $SOURCE"
-  elif command -v wget >/dev/null 2>&1; then
-    wget -q "$SOURCE" -O "$TMP/src.tar.gz" || fail "could not download $SOURCE"
+  if [ "$HAVE" = curl ]; then
+    curl -fsSL "$LINK" -o "$TMP/src.tar.gz" || fail "could not download $SOURCE"
   else
-    fail "needs curl or wget to download Vixana"
+    wget -q "$LINK" -O "$TMP/src.tar.gz" || fail "could not download $SOURCE"
   fi
   mkdir "$TMP/src"
   tar -xzf "$TMP/src.tar.gz" -C "$TMP/src" || fail "the download is not a .tar.gz archive"

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download requests — Vixana</title>
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=6.6.0-1">
+</head>
+<body>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="bar-brand" href="./" aria-label="Vixana home">
+      <img src="assets/img/statement.svg" alt="Vixana" width="754" height="100">
+    </a>
+    <a class="btn btn-small" href="account.html">Account</a>
+  </div>
+</header>
+<main class="auth" id="owner-page">
+  <div class="auth-card auth-card-wide">
+    <h1 class="auth-title">Requests</h1>
+    <div id="own-signin" hidden>
+      <p class="auth-lede">Sign in with the owner's Google account to approve downloads.</p>
+      <button class="btn btn-google" id="own-google" type="button"><span class="btn-glyph" aria-hidden="true">G</span><span class="btn-label">Continue with Google</span></button>
+    </div>
+    <p class="auth-lede" id="own-lede" hidden>Each approval allows one download of one file. After you approve, tell
+      the person by email so they can download.</p>
+    <ul class="requests" id="own-list"></ul>
+    <p class="auth-error" id="own-error" role="alert" hidden></p>
+  </div>
+</main>
+<script src="account.js?v=6.6.0-1" defer></script>
+</body>
+</html>

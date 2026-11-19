@@ -5,13 +5,14 @@
   "use strict";
 
   // Where the install scripts live: this site when it is served over http(s), else the public address.
-  var PUBLIC_SITE = "https://vixana.is-a.dev";
+  var PUBLIC_SITE = "https://vixana.online";
   var REPO = "https://github.com/ShadyMayez/vixana-v6";            // the source (private for now)
   var PUBLIC_REPO = "https://github.com/ShadyMayez/vixana-website";  // the site and the downloads
-  var RELEASE = PUBLIC_REPO + "/releases/latest";
-  var DOWNLOADS = {                                                  // direct links where one file fits
-    windows: RELEASE + "/download/Vixana_6.1.1_x64-setup.exe",
-    linux: RELEASE + "/download/Vixana_6.1.1_amd64.AppImage",          // .deb and .rpm are linked beside it
+  // every download goes through download.html: the owner approves each one (docs/release/DOWNLOADS.md)
+  var RELEASE = "#download";
+  var DOWNLOADS = {
+    windows: "download.html?file=Vixana_6.2.0_x64-setup.exe&tag=v6.2.0",
+    linux: "download.html?file=Vixana_6.2.0_amd64.AppImage&tag=v6.2.0",   // .deb and .rpm are linked beside it
   };
   // the folder this page is served from, so a site under a path (user.github.io/vixana-website/) works too
   var site = /^https?:$/.test(location.protocol)

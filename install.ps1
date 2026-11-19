@@ -3,14 +3,15 @@
 #   irm https://YOUR-SITE/install.ps1 | iex
 #
 # What it does, all inside your user profile (no administrator rights):
-#   1. downloads Vixana's source (or copies it from $env:VIXANA_SOURCE),
+#   1. downloads Vixana's source once the owner approves it (or copies it from $env:VIXANA_SOURCE): it shows a link
+#      and a code; you sign in on the website with Google, ask for approval if you have none, and allow this install,
 #   2. makes a Python environment with the CPU engine's packages,
 #   3. adds a `vixana` command and puts its folder on your user PATH.
 # To remove Vixana: delete %LOCALAPPDATA%\Vixana\cli, %LOCALAPPDATA%\Vixana\venvs\cli and %LOCALAPPDATA%\Vixana\bin,
 # and remove that bin folder from your user PATH.
 #
-# Settings (environment variables): VIXANA_VERSION (default 6.1.1), VIXANA_SOURCE (a .zip URL or a local folder;
-# default that release's vixana-cli-<version>.zip from github.com/ShadyMayez/vixana-website/releases),
+# Settings (environment variables): VIXANA_VERSION (default 6.2.0), VIXANA_SOURCE (a .zip URL or a local folder;
+# default that release's vixana-cli-<version>.zip, after the owner's approval), VIXANA_ACCOUNTS (the accounts server),
 # VIXANA_HOME (default %LOCALAPPDATA%\Vixana), VIXANA_PYTHON (path to python.exe 3.11-3.13).
 
 $ErrorActionPreference = "Stop"
@@ -18,9 +19,9 @@ $ProgressPreference = "SilentlyContinue"   # Invoke-WebRequest is very slow with
 
 function Stop-Install([string]$message) { Write-Host "Vixana install stopped: $message" -ForegroundColor Red; throw $message }
 
-$releases = "https://github.com/ShadyMayez/vixana-website/releases"
-$version = if ($env:VIXANA_VERSION) { $env:VIXANA_VERSION } else { "6.1.1" }
-$source = if ($env:VIXANA_SOURCE) { $env:VIXANA_SOURCE } else { "$releases/download/v$version/vixana-cli-$version.zip" }
+$version = if ($env:VIXANA_VERSION) { $env:VIXANA_VERSION } else { "6.2.0" }
+$source = $env:VIXANA_SOURCE
+$accounts = if ($env:VIXANA_ACCOUNTS) { $env:VIXANA_ACCOUNTS } else { "https://atwozbhkjbuvqzdbpgam.supabase.co/functions/v1/accounts" }
 $vhome = if ($env:VIXANA_HOME) { $env:VIXANA_HOME } else { Join-Path $env:LOCALAPPDATA "Vixana" }
 $app = Join-Path $vhome "cli"
 $venv = Join-Path $vhome "venvs\cli"
@@ -55,17 +56,50 @@ if (-not $python) {
     else { Stop-Install "Vixana needs Python 3.11, 3.12 or 3.13. Install Python 3.12 from https://www.python.org/downloads/ (or: winget install Python.Python.3.12), or install uv, then run this again." }
 }
 
+# ---- the owner's approval (docs/release/DOWNLOADS.md) ----
+function Get-ApprovedLink {
+    $file = "vixana-cli-$version.zip"
+    $label = "install.ps1 on " + ($env:COMPUTERNAME -replace '[^A-Za-z0-9._-]', '')
+    try {
+        $start = Invoke-RestMethod -Method Post -Uri "$accounts/api/install/start" -ContentType "application/json" `
+            -Body (@{ file = $file; tag = "v$version"; label = $label } | ConvertTo-Json -Compress)
+    } catch { Stop-Install "could not reach the Vixana server ($($_.Exception.Message))" }
+    Write-Host ""
+    Write-Host "Every Vixana download is approved by its owner. To continue:"
+    Write-Host "  1. Open $($start.verification_url)"
+    Write-Host "  2. Sign in with Google and check that the page shows the code $($start.code)"
+    Write-Host "  3. If you have no approval yet, press Ask for approval there and send the email"
+    Write-Host "  4. Once approved, press Allow. This window waits up to an hour."
+    Write-Host ""
+    try { Start-Process $start.verification_url | Out-Null } catch { }
+    $body = @{ device_secret = $start.device_secret } | ConvertTo-Json -Compress
+    for ($waited = 0; $waited -lt 3600; $waited += 3) {
+        Start-Sleep -Seconds 3
+        try { $answer = Invoke-RestMethod -Method Post -Uri "$accounts/api/install/poll" -ContentType "application/json" -Body $body }
+        catch { continue }
+        switch ($answer.status) {
+            "ready" { return $answer.url }
+            "denied" { Stop-Install "the install was refused on the website" }
+            "expired" { Stop-Install "the code expired; run the install command again" }
+            "pending" { if ($waited -gt 0 -and $waited % 60 -eq 0) { Write-Host "  still waiting for approval ($($waited / 60) min)" } }
+            default { Stop-Install "the Vixana server said: $($answer.error)" }
+        }
+    }
+    Stop-Install "no approval within an hour; run the install command again"
+}
+
 # ---- source ----
 $tmp = Join-Path ([IO.Path]::GetTempPath()) ("vixana-" + [Guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $tmp | Out-Null
 try {
-    if (Test-Path $source -PathType Container) {
+    if ($source -and (Test-Path $source -PathType Container)) {
         Write-Host "Copying the source from $source"
         $src = (Resolve-Path $source).Path
     } else {
+        if ($source) { $link = $source } else { $link = Get-ApprovedLink; $source = "vixana-cli-$version.zip" }
         Write-Host "Downloading $source"
         $zip = Join-Path $tmp "src.zip"
-        Invoke-WebRequest -Uri $source -OutFile $zip -UseBasicParsing
+        Invoke-WebRequest -Uri $link -OutFile $zip -UseBasicParsing
         Expand-Archive -Path $zip -DestinationPath (Join-Path $tmp "src")
         $src = (Get-ChildItem (Join-Path $tmp "src") -Directory | Select-Object -First 1).FullName
     }
