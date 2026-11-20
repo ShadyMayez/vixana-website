@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vixana — local AutoML for your own models</title>
-<meta name="description" content="Vixana builds, tests and combines many machine-learning models from your spreadsheet, on your own computer. In an open test it finished ahead of the AutoML from Amazon and Microsoft on 30 tables it had never seen.">
+<meta name="description" content="Vixana builds, tests and combines many machine-learning models from your spreadsheet, on your own computer. In two registered benchmarks it beat Amazon's AutoGluon on 82 of 103 tables, and in the latest it also beat Microsoft's FLAML.">
 <meta name="theme-color" content="#000000">
 <meta property="og:title" content="Vixana — local AutoML">
-<meta property="og:description" content="Machine learning that builds itself, on your own computer. Ahead of the AutoML from Amazon and Microsoft in an open test.">
+<meta property="og:description" content="Machine learning that builds itself, on your own computer. Beat Amazon's AutoML on 82 of 103 tables in registered tests.">
 <meta property="og:image" content="assets/img/icon-256.png">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/icon-256.png">
@@ -47,8 +47,8 @@
         <p class="hero-tag">Machine learning that builds itself.<br>On your own computer.</p>
         <p class="hero-lede">Drop in a spreadsheet and choose what to predict. Vixana builds, tests and combines many
           models for you, and your data never leaves the room.</p>
-        <a class="hero-proof" href="#results"><strong>Ahead of the AutoML from Amazon and Microsoft</strong>
-          <span>in an open test on 30 tables it had never seen</span></a>
+        <a class="hero-proof" href="#results"><strong>Beat Amazon's AutoML on 82 of 103 tables</strong>
+          <span>and Microsoft's in our latest test · two registered benchmarks</span></a>
         <div class="field" id="hero-cmd">
           <code data-cmd="unix">curl -fsSL https://vixana.online/install.sh | sh</code>
           <button class="btn btn-dark" type="button" data-copy="unix">Copy</button>
@@ -179,27 +179,30 @@
     <div class="band-inner split split-flip">
       <div class="split-media media-card media-ink stats">
         <dl class="facts">
-          <div><dt>25 of 29</dt><dd>tables where Vixana beat AutoGluon, the AutoML engine Amazon builds into SageMaker,
-            at its best-quality setting. 3 losses, 1 tie.</dd></div>
-          <div><dt>5 of 5</dt><dd>well-known AutoML systems left behind, including FLAML from Microsoft Research.</dd></div>
-          <div><dt>+3.9%</dt><dd>typical (median) gain over AutoGluon, on data none of them had seen.</dd></div>
+          <div><dt>82 of 103</dt><dd>tables where Vixana beat AutoGluon, the AutoML engine Amazon builds into SageMaker.
+            13 losses, 8 ties, over two registered benchmarks.</dd></div>
+          <div><dt>5 of 5</dt><dd>well-known AutoML systems beaten in the latest test, including FLAML from Microsoft
+            Research.</dd></div>
+          <div><dt>+0.6–3.9%</dt><dd>typical (median) gain over AutoGluon, from stage to stage.</dd></div>
         </dl>
       </div>
       <div class="split-text">
         <h2 id="results-title" class="title">Beat Amazon's AutoML. And Microsoft's.</h2>
-        <p class="lede">We put Vixana up against the five AutoML systems data scientists know best, including
-          <strong>AutoGluon</strong>, the engine behind Amazon SageMaker Autopilot's ensemble mode, and
-          <strong>FLAML</strong> from Microsoft Research. Thirty tables none of them had seen, the same machine, the
-          same five minutes each. Vixana's GPU engine finished ahead of every one.</p>
-        <p class="lede">No cloud, no rented servers: a 4 GB graphics card and two processor threads.</p>
-        <p class="results-note">How we kept it fair: the rules were written before the first run; the tables were drawn
-          after 585 known datasets were set aside; each system ran locally on the same computer. One table was set
-          aside by the registered rule after Vixana hit its 8 GB memory cap there, and the CPU engine did not reach the
-          bar against AutoGluon. The paper, coming soon, reports all of it.</p>
+        <p class="lede">We tested Vixana against <strong>AutoGluon</strong>, the engine behind Amazon SageMaker
+          Autopilot's ensemble mode, in two benchmarks whose rules were written before they ran: 114 tables, from a
+          hundred rows to almost half a million. Vixana's GPU engine won 82 of the 103 tables that could be decided and
+          lost 13.</p>
+        <p class="lede">In the latest test, on 30 fresh tables, it also beat <strong>FLAML</strong> from Microsoft
+          Research and three more systems, with the same five minutes each on a 4 GB graphics card. No cloud, no
+          rented servers.</p>
+        <p class="results-note">The fine print: the ten largest tables, up to 470,000 rows, could not be decided on our
+          16 GB test laptop, because memory ran out for Vixana and AutoGluon alike; where they could be scored, they were
+          near ties. The first benchmark's early stages used earlier versions of the GPU engine. The CPU engine did not
+          reach the bar against AutoGluon in the latest test. The paper, coming soon, reports every number.</p>
       </div>
     </div>
     <div class="band-inner">
-      <p class="tiles-title">The systems it was tested against</p>
+      <p class="tiles-title">The systems it was tested against in the latest benchmark</p>
       <ul class="tiles">
         <li><span>AutoGluon</span><small>Amazon · best quality</small></li>
         <li><span>AutoGluon</span><small>Amazon · extreme</small></li>
@@ -237,9 +240,9 @@
             too.</p>
           <ol class="proof">
             <li><strong>Rules sealed</strong><span>scores, time budgets and the win rule, fixed in advance</span></li>
-            <li><strong>Unseen tables</strong><span>30 tables, drawn after 585 known datasets were set aside</span></li>
-            <li><strong>Same machine</strong><span>every system: 5 minutes, 2 CPU threads, one 4 GB GPU</span></li>
-            <li><strong>All of it shown</strong><span>25 wins, 3 losses, 1 tie, and where the CPU engine fell short</span></li>
+            <li><strong>New tables</strong><span>114 tables over two benchmarks; the latest 30 drawn after 585 known datasets were set aside</span></li>
+            <li><strong>Same machine</strong><span>every system on the same laptop, with the same time budget</span></li>
+            <li><strong>All of it shown</strong><span>82 wins, 13 losses, 8 ties, and the tables we could not decide</span></li>
           </ol>
         </article>
         <article class="tile-card tile-paper">
@@ -356,8 +359,8 @@
       </details>
       <details>
         <summary>Is it as good as cloud AutoML?</summary>
-        <p>In our registered test, Vixana's GPU engine beat AutoGluon, the engine Amazon uses in SageMaker Autopilot, on
-          25 of 29 tables, with the same five minutes on the same small computer. Cloud services can rent bigger
+        <p>In two registered benchmarks, Vixana's GPU engine beat AutoGluon, the engine Amazon uses in SageMaker
+          Autopilot, on 82 of 103 tables, with the same time budget on the same small computer. Cloud services can rent bigger
           machines; the point of Vixana is that you don't have to, and that your data stays with you.</p>
       </details>
       <details>
