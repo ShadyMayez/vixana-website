@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs — Vixana</title>
+<meta name="description" content="What Vixana needs, what it does with your table, and how to use it: computers, graphics cards, data, time and the ways to run it.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=6.7.0">
+</head>
+<body class="page-light">
+<a class="skip" href="#doc">Skip to content</a>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="bar-brand" href="./" aria-label="Vixana home">
+      <img src="assets/img/statement.svg" alt="Vixana" width="754" height="100">
+      <span class="bar-tag">AutoML for your own models</span>
+    </a>
+    <nav class="bar-nav" aria-label="Site">
+      <a href="./#why">Why</a>
+      <a href="./#results">Results</a>
+      <a href="docs.html" aria-current="page">Docs</a>
+      <a href="./#faq">Questions</a>
+    </nav>
+    <a class="bar-signin" href="login.html" data-account-link hidden>Sign in</a>
+    <a class="btn btn-small" href="./#download">Download</a>
+  </div>
+</header>
+
+<main class="docs" id="doc">
+  <aside class="docs-toc" aria-label="On this page">
+    <p class="docs-toc-title">On this page</p>
+    <ol>
+      <li><a href="#what">What Vixana does</a></li>
+      <li><a href="#engines">The two engines</a></li>
+      <li><a href="#hardware">Will it run on my computer?</a></li>
+      <li><a href="#gpu">Graphics cards</a></li>
+      <li><a href="#data">Your data</a></li>
+      <li><a href="#time">How long a run takes</a></li>
+      <li><a href="#use">Ways to use it</a></li>
+      <li><a href="#download">Downloads and accounts</a></li>
+    </ol>
+  </aside>
+
+  <article class="docs-body">
+    <h1 class="inscription">Docs</h1>
+    <p class="docs-lede">What Vixana needs from your computer, what it does with your table, and the ways to use it.</p>
+
+    <section id="what">
+      <h2>What Vixana does</h2>
+      <p>Give Vixana a table and choose the column you want to predict. Vixana works out whether that column is a
+        category or a number and picks a fitting score. It then trains many kinds of model on the same splits of your
+        data and tests each one on rows it did not learn from. The best are joined into one predictor.</p>
+      <p>The result is a model file you keep. Use it to predict new rows, today or a year from now, without sending
+        your data anywhere.</p>
+    </section>
+
+    <section id="engines">
+      <h2>The two engines</h2>
+      <dl class="docs-pair">
+        <div>
+          <dt>CPU engine</dt>
+          <dd><strong>Vixana Core 5.7.1.</strong> Runs on any computer. Gradient-boosted trees, neural networks and a
+            pretrained tabular model, stacked and blended.</dd>
+        </div>
+        <div>
+          <dt>GPU engine</dt>
+          <dd><strong>Vixana G-final.</strong> The same pipeline plus Vixana's tabular foundation model, running on an
+            NVIDIA graphics card. It is judged by the same rules as every other model in the run.</dd>
+        </div>
+      </dl>
+      <p>You don't have to choose a model size. When a GPU run starts, Vixana checks your card and sets itself up
+        for it. Without a suitable card, use the CPU engine.</p>
+    </section>
+
+    <section id="hardware">
+      <h2>Will it run on my computer?</h2>
+      <table class="spec">
+        <caption>What Vixana needs</caption>
+        <tbody>
+          <tr><th scope="row">System</th><td>Windows 10 or 11, 64-bit. Linux, 64-bit, as an AppImage, .deb or .rpm.
+            On macOS, use the command line; it runs the CPU engine.</td></tr>
+          <tr><th scope="row">Memory</th><td>The published results were measured with 8 GB of memory. Bigger tables
+            need more.</td></tr>
+          <tr><th scope="row">Processor</th><td>Any 64-bit processor. The published results used 2 threads; more
+            cores let Vixana try more models in the same time.</td></tr>
+          <tr><th scope="row">Graphics card</th><td>Not needed for the CPU engine. The GPU engine needs an NVIDIA
+            card with 4 GB of graphics memory or more.</td></tr>
+          <tr><th scope="row">Command line</th><td>Python 3.11, 3.12 or 3.13, or <a href="https://docs.astral.sh/uv/">uv</a>,
+            which can fetch one for you. No administrator rights.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="gpu">
+      <h2>Graphics cards</h2>
+      <p>The GPU engine's foundation model learns from example rows of your table. How many it can read at once
+        depends on your card's memory, so Vixana picks the model size for your card:</p>
+      <table class="spec spec-grid">
+        <caption>What the GPU engine uses on each card</caption>
+        <thead>
+          <tr><th scope="col">Graphics memory</th><th scope="col">Foundation model</th><th scope="col">Example rows it reads</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>No NVIDIA card</td><td>None; use the CPU engine</td><td>—</td></tr>
+          <tr><td>Under 6 GB, such as 4 GB</td><td>Compact</td><td>Up to 8,000</td></tr>
+          <tr><td>6 GB to 16 GB</td><td>Medium</td><td>Up to 20,000</td></tr>
+          <tr><td>16 GB or more</td><td>Large</td><td>Up to 50,000</td></tr>
+        </tbody>
+      </table>
+      <p>On a bigger table, the foundation model reads a sample of the rows as examples, and the other models still
+        learn from every row. The published results were measured on a 4 GB card, the smallest size in the table.</p>
+      <p>Before a GPU run, close programs that use the graphics card heavily, such as games. Vixana treats a card
+        that another program is busy with as not available.</p>
+    </section>
+
+    <section id="data">
+      <h2>Your data</h2>
+      <ul>
+        <li><strong>Files:</strong> CSV, TSV, Excel, Parquet, Feather or JSON. One row per example.</li>
+        <li><strong>What it predicts:</strong> one column. Either a category, such as churn or not, which product,
+          which diagnosis, or a number, such as a price, demand or a time.</li>
+        <li><strong>Size:</strong> tested on tables from 100 to 100,000 rows.</li>
+        <li><strong>Where it stays:</strong> on your computer. Tables, models and predictions are kept in folders on
+          the machine that runs Vixana.</li>
+      </ul>
+    </section>
+
+    <section id="time">
+      <h2>How long a run takes</h2>
+      <p>You choose. Vixana plans its work to fit the time you give it, and more time lets it train and compare
+        more models. Very short times leave little room: on a big table, a one-minute run can take longer than
+        asked.</p>
+      <p>The comparison on the home page gave every system five minutes per table. Vixana was also measured with one
+        minute per table.</p>
+    </section>
+
+    <section id="use">
+      <h2>Ways to use it</h2>
+      <dl class="docs-list">
+        <div><dt>The desktop app</dt><dd>The Studio: experiments, models, predictions and Python notebooks in one
+          window. It sets itself up on first start, a few minutes once.</dd></div>
+        <div><dt>The command line</dt><dd>Install with one command, then run <code>vixana</code> for an interactive
+          session, or <code>vixana doctor</code> to check your computer.</dd></div>
+        <div><dt>The model file</dt><dd>Every run saves one <code>.vixana</code> file. Predict with it from the app,
+          the command line or a notebook.</dd></div>
+        <div><dt>A shared server</dt><dd>A Docker image runs Vixana for a team on one machine, with the same
+          sign-in.</dd></div>
+      </dl>
+    </section>
+
+    <section id="download">
+      <h2>Downloads and accounts</h2>
+      <p>Each download is approved by the owner. Sign in with Google, ask for approval, and download once it is
+        approved; one approval covers one download. The install commands work the same way: they show a link and a
+        code, and continue once you allow them.</p>
+      <p>Vixana is free for noncommercial use under the PolyForm Noncommercial License 1.0.0. See the
+        <a href="privacy.html">privacy policy</a> and the <a href="terms.html">terms</a>.</p>
+      <p class="docs-next"><a class="btn btn-icon" href="./#download"><span class="btn-glyph" aria-hidden="true">↓</span><span class="btn-label">Go to downloads</span></a></p>
+    </section>
+  </article>
+</main>
+
+<footer class="foot">
+  <div class="foot-bg" aria-hidden="true"></div>
+  <img class="foot-mark" src="assets/img/statement.svg" alt="Vixana" width="754" height="100" loading="lazy">
+  <p class="foot-line">Local AutoML. Your data, your machine, your model.</p>
+  <nav aria-label="Footer">
+    <a href="./#download">Download</a>
+    <a href="docs.html">Docs</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </nav>
+  <p>Copyright 2026 Shady Mayez. Free for noncommercial use.</p>
+</footer>
+<script src="account.js?v=6.6.0-1" defer></script>
+</body>
+</html>
