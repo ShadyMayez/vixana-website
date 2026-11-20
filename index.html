@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vixana — local AutoML for your own models</title>
-<meta name="description" content="Vixana trains many models on your table, checks each one on rows it has not seen, and joins the best into one predictor, on your own computer. Desktop app for Windows and Linux, command line for Linux, macOS and Windows.">
+<meta name="description" content="Vixana builds, tests and combines many machine-learning models from your spreadsheet, on your own computer. In an open test it finished ahead of the AutoML from Amazon and Microsoft on 30 tables it had never seen.">
 <meta name="theme-color" content="#000000">
 <meta property="og:title" content="Vixana — local AutoML">
-<meta property="og:description" content="Many models, checked against data they have not seen, joined into one answer. On your own computer.">
+<meta property="og:description" content="Machine learning that builds itself, on your own computer. Ahead of the AutoML from Amazon and Microsoft in an open test.">
 <meta property="og:image" content="assets/img/icon-256.png">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/icon-256.png">
 <link rel="preload" href="assets/fonts/archivo-expanded-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=6.9.0">
+<link rel="stylesheet" href="styles.css?v=6.10.0">
 <!-- the hero's sequence plays only where motion is welcome; set before the first paint so nothing flashes -->
 <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
 </head>
@@ -44,9 +44,11 @@
     <div class="band-inner hero-center">
       <div class="hero-inner">
         <h1 id="hero-title" class="hero-name" aria-label="Vixana"><!-- statement: written by website/art/make_statement.py --><svg class="statement-word" viewBox="0 0 630.0 100" data-v="2.11 127.71 32.28 4.84" aria-hidden="true"><defs><linearGradient id="sheen" gradientUnits="userSpaceOnUse" x1="-180" y1="0" x2="-40" y2="60"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/><animateTransform id="sheen-run" attributeName="gradientTransform" type="translate" from="0 0" to="870 0" dur="1.8s" begin="4.4s; sheen-run.end + 7s" fill="freeze"/></linearGradient></defs><g id="word-shape"><path class="word-v" d="M2.11 0 65.96 100 129.82 0H120.51L88.26 48.23L115.81 0H109.74L83.74 38.46L105.07 0H97.54L65.96 49.46L34.38 0H26.85L48.18 38.46L22.19 0H16.12L43.66 48.23L11.42 0Z"/><path class="word-rest" d="M144.61 100H168.28V19.77H162.09L160.39 64.92L158.69 19.77H154.19L152.5 64.92L150.8 19.77H144.61Z M183.21 100H211.66L234.4 73.88H235.69L257.84 100H288.51L250.61 57.55L285.13 19.77H275.66L256.5 41.72L271.79 19.77H266.25L247.4 41.72L262.37 19.77H256.79L237.32 42.27H236.15L217.38 19.77H211.11L225.37 41.72L206.92 19.77H200.93L215.54 41.72L196.73 19.77H186.71L221.22 58.6Z M294.23 100H318.72L324.78 87.17H367.7L373.76 100H399.53L360.12 19.77H354.2L361.97 39.28L350.57 19.77H343.16L331.41 39.28L339.53 19.77H333.64ZM332.71 69.8 339.94 53.47Q340.76 51.84 341.75 49.27Q342.74 46.71 343.91 43.91Q345.07 41.11 345.89 39.01H346.71Q347.17 39.94 347.87 41.87Q348.57 43.79 349.5 46.06Q350.44 48.34 351.25 50.38Q352.07 52.42 352.54 53.47L359.77 69.8Z M413.53 100H435.92V65.25Q435.92 61.4 435.86 58.02Q435.8 54.64 435.8 53.12H436.73Q438.6 54.87 441.63 57.9Q444.66 60.93 447.46 63.38L488.05 100H508.92V19.77H503.06L501.49 64.92L499.85 19.77H495.6L494.07 64.92L492.39 19.77H486.53V55.57Q486.53 58.02 486.59 61.17Q486.65 64.31 486.65 66.41H485.6Q484.31 64.9 482.51 63.15Q480.7 61.4 479.01 59.77Q477.32 58.13 476.27 57.2L434.75 19.77H431.31L459.66 53.72L428.26 19.77H422.25L420.61 53.72L419.2 19.77H413.53Z M522.92 100H547.41L553.47 87.17H596.38L602.45 100H628.22L588.8 19.77H582.89L590.66 39.28L579.25 19.77H571.85L560.09 39.28L568.21 19.77H562.33ZM561.4 69.8 568.63 53.47Q569.45 51.84 570.44 49.27Q571.43 46.71 572.59 43.91Q573.76 41.11 574.58 39.01H575.39Q575.86 39.94 576.56 41.87Q577.26 43.79 578.19 46.06Q579.13 48.34 579.94 50.38Q580.76 52.42 581.22 53.47L588.45 69.8Z"/></g><use class="word-sheen" href="#word-shape" fill="url(#sheen)"/></svg><!-- /statement --></h1>
-        <p class="hero-tag">The model that builds your models.</p>
-        <p class="hero-lede">Give Vixana a table and the column to predict. It trains many models, tests each one on rows
-          it has not seen, and joins the best into one predictor, all on your own computer.</p>
+        <p class="hero-tag">Machine learning that builds itself.<br>On your own computer.</p>
+        <p class="hero-lede">Drop in a spreadsheet and choose what to predict. Vixana builds, tests and combines many
+          models for you, and your data never leaves the room.</p>
+        <a class="hero-proof" href="#results"><strong>Ahead of the AutoML from Amazon and Microsoft</strong>
+          <span>in an open test on 30 tables it had never seen</span></a>
         <div class="field" id="hero-cmd">
           <code data-cmd="unix">curl -fsSL https://vixana.online/install.sh | sh</code>
           <button class="btn btn-dark" type="button" data-copy="unix">Copy</button>
@@ -142,11 +144,11 @@
         </ol>
       </div>
       <div class="split-text">
-        <h2 id="how-title" class="title">Five steps, inside your budget</h2>
-        <p class="lede">Every candidate model gets a short trial; the strong ones train on folds and are scored only on
-          rows they did not see. A second level learns from those scores, the best blend is kept, and the
-          probabilities are tuned so that 0.8 means right about eight times in ten.</p>
-        <p class="lede">You choose how long a run takes. Vixana plans its work to fit that time.</p>
+        <h2 id="how-title" class="title">A data scientist's method, done for you</h2>
+        <p class="lede">The careful steps an expert takes by hand, behind one button. Weak models are dropped early, every
+          score comes from rows the model never saw, and the winners are blended into one predictor you can trust:
+          when it says 80%, it is right about eight times in ten.</p>
+        <p class="lede">You set the time, from one minute to an hour. Vixana plans its work to fit it.</p>
         <a class="btn btn-dark" href="docs.html#what">How Vixana works</a>
       </div>
     </div>
@@ -156,11 +158,11 @@
   <section class="band band-graphite" id="engines" aria-labelledby="engines-title">
     <div class="band-inner split">
       <div class="split-text">
-        <h2 id="engines-title" class="title">CPU or GPU, one pipeline</h2>
-        <p class="lede"><strong>Vixana Core 5.7.1</strong> runs on any computer: gradient-boosted trees, neural
-          networks and a pretrained tabular model, stacked and blended.</p>
-        <p class="lede"><strong>Vixana G-final</strong> adds a tabular foundation model on an NVIDIA card and sizes it
-          to the card's memory. 4 GB is enough.</p>
+        <h2 id="engines-title" class="title">Runs on the computer you already have</h2>
+        <p class="lede"><strong>No graphics card?</strong> The CPU engine runs on any laptop: trees, neural networks and
+          a pretrained model, stacked and blended.</p>
+        <p class="lede"><strong>Have an NVIDIA card, even a 4 GB one?</strong> The GPU engine adds Vixana's foundation
+          model and sizes it to your card. That is the engine that won the test below.</p>
         <a class="btn" href="docs.html#hardware">Will it run on my computer?</a>
       </div>
       <div class="split-media fan" aria-hidden="true">
@@ -177,25 +179,34 @@
     <div class="band-inner split split-flip">
       <div class="split-media media-card media-ink stats">
         <dl class="facts">
-          <div><dt>25 · 3 · 1</dt><dd>Wins, losses and ties against AutoGluon 1.6.3 best quality, with a median gain of
-            3.9%.</dd></div>
-          <div><dt>5 of 5</dt><dd>Systems beaten under the same rules.</dd></div>
-          <div><dt>585</dt><dd>OpenML datasets excluded before the 30 test tables were drawn.</dd></div>
+          <div><dt>25 of 29</dt><dd>tables where Vixana beat AutoGluon, the AutoML engine Amazon builds into SageMaker,
+            at its best-quality setting. 3 losses, 1 tie.</dd></div>
+          <div><dt>5 of 5</dt><dd>well-known AutoML systems left behind, including FLAML from Microsoft Research.</dd></div>
+          <div><dt>+3.9%</dt><dd>typical (median) gain over AutoGluon, on data none of them had seen.</dd></div>
         </dl>
       </div>
       <div class="split-text">
-        <h2 id="results-title" class="title">Ahead of the leading systems</h2>
-        <p class="lede">Against the five leading AutoML systems, on 30 tables it had never seen, Vixana G-final came out
-          ahead under rules written before the test began.</p>
-        <p class="results-note">Five minutes per table, 2 CPU threads and a 4 GB GPU, the same for every system. One of
-          the 30 tables was set aside by the registered rule after G-final hit its 8 GB memory cap there, and the CPU
-          engine did not reach the bar against AutoGluon. The paper, coming soon, reports both.</p>
+        <h2 id="results-title" class="title">Beat Amazon's AutoML. And Microsoft's.</h2>
+        <p class="lede">We put Vixana up against the five AutoML systems data scientists know best, including
+          <strong>AutoGluon</strong>, the engine behind Amazon SageMaker Autopilot's ensemble mode, and
+          <strong>FLAML</strong> from Microsoft Research. Thirty tables none of them had seen, the same machine, the
+          same five minutes each. Vixana's GPU engine finished ahead of every one.</p>
+        <p class="lede">No cloud, no rented servers: a 4 GB graphics card and two processor threads.</p>
+        <p class="results-note">How we kept it fair: the rules were written before the first run; the tables were drawn
+          after 585 known datasets were set aside; each system ran locally on the same computer. One table was set
+          aside by the registered rule after Vixana hit its 8 GB memory cap there, and the CPU engine did not reach the
+          bar against AutoGluon. The paper, coming soon, reports all of it.</p>
       </div>
     </div>
     <div class="band-inner">
-      <p class="tiles-title">Compared under the same rules</p>
+      <p class="tiles-title">The systems it was tested against</p>
       <ul class="tiles">
-        <li>AutoGluon best</li><li>AutoGluon extreme</li><li>FLAML</li><li>H2O</li><li>LightAutoML</li><li>MLJAR</li>
+        <li><span>AutoGluon</span><small>Amazon · best quality</small></li>
+        <li><span>AutoGluon</span><small>Amazon · extreme</small></li>
+        <li><span>FLAML</span><small>Microsoft Research</small></li>
+        <li><span>H2O AutoML</span><small>H2O.ai</small></li>
+        <li><span>LightAutoML</span><small>Sber AI Lab</small></li>
+        <li><span>MLJAR</span><small>MLJAR</small></li>
       </ul>
     </div>
   </section>
@@ -344,6 +355,12 @@
           engine's packages the first time and to sign in with Google.</p>
       </details>
       <details>
+        <summary>Is it as good as cloud AutoML?</summary>
+        <p>In our registered test, Vixana's GPU engine beat AutoGluon, the engine Amazon uses in SageMaker Autopilot, on
+          25 of 29 tables, with the same five minutes on the same small computer. Cloud services can rent bigger
+          machines; the point of Vixana is that you don't have to, and that your data stays with you.</p>
+      </details>
+      <details>
         <summary>Is Vixana free?</summary>
         <p>Yes, for noncommercial use: personal projects, research, study and teaching, under the PolyForm Noncommercial
           License 1.0.0. For commercial use, contact the author.</p>
@@ -377,10 +394,13 @@
     <div class="band-art" style="--art: url(assets/bg/flow.webp?v=6.3)" aria-hidden="true"></div>
     <div class="band-inner final">
       <h2 id="final-title" class="title title-center">Your data. Your machine. Your model.</h2>
+      <p class="lede lede-center">Free for personal projects, research, study and teaching. Install in one line, or
+        download the app.</p>
       <div class="field field-center">
         <code data-cmd="unix">curl -fsSL https://vixana.online/install.sh | sh</code>
         <button class="btn btn-dark" type="button" data-copy="unix">Copy</button>
       </div>
+      <div class="hero-actions"><a class="btn btn-icon" href="#download"><span class="btn-glyph" aria-hidden="true">↓</span><span class="btn-label">Download the app</span></a></div>
     </div>
   </section>
 </main>

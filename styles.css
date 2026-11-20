@@ -547,3 +547,15 @@ html { scroll-padding-top: 104px; }
   .fan-card { padding: 16px 18px; gap: 8px; }
   .fan-big { font-size: 22px; }
 }
+
+/* 6.10: proof under the hero, makers on the tiles */
+.hero-proof { display: inline-grid; justify-items: center; gap: 4px; margin-top: 22px; padding: 12px 22px; border: 1px solid #3d3d3d; border-radius: 999px;
+  background: rgba(0, 0, 0, .6); color: #fff; text-decoration: none; }
+.hero-proof strong { font: 800 13px/1.2 var(--expanded); text-transform: uppercase; letter-spacing: 0.02em; }
+.hero-proof span { font-size: 14px; color: #bdbdbd; }
+.hero-proof:hover { border-color: #fff; }
+.motion .hero .hero-proof { animation: rise .9s 3.8s both; }
+.tiles li { display: grid; gap: 8px; justify-items: center; text-align: center; }
+.tiles li small { font: 700 10px/1 var(--courier); letter-spacing: 0.16em; text-transform: uppercase; opacity: .7; }
+.final .hero-actions { justify-content: center; }
+@media (max-width: 720px) { .hero-proof { border-radius: 22px; } }
