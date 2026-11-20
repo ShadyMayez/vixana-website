@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/icon-256.png">
 <link rel="preload" href="assets/fonts/archivo-expanded-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=6.8.0">
+<link rel="stylesheet" href="styles.css?v=6.9.0">
 <!-- the hero's sequence plays only where motion is welcome; set before the first paint so nothing flashes -->
 <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
 </head>
@@ -25,6 +25,7 @@
       <img src="assets/img/statement.svg" alt="Vixana" width="754" height="100">
     </a>
     <nav class="bar-nav" aria-label="Sections">
+      <a href="#who">Who it's for</a>
       <a href="#how">How it works</a>
       <a href="#engines">Engines</a>
       <a href="#results">Results</a>
@@ -40,8 +41,8 @@
   <!-- Hero: lines from every side gather into the V (many models, one answer), then the name completes -->
   <section class="hero band band-black" id="top" aria-labelledby="hero-title">
     <canvas class="hero-flow" aria-hidden="true"></canvas>
-    <div class="band-inner split">
-      <div class="split-text hero-inner">
+    <div class="band-inner hero-center">
+      <div class="hero-inner">
         <h1 id="hero-title" class="hero-name" aria-label="Vixana"><!-- statement: written by website/art/make_statement.py --><svg class="statement-word" viewBox="0 0 630.0 100" data-v="2.11 127.71 32.28 4.84" aria-hidden="true"><defs><linearGradient id="sheen" gradientUnits="userSpaceOnUse" x1="-180" y1="0" x2="-40" y2="60"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/><animateTransform id="sheen-run" attributeName="gradientTransform" type="translate" from="0 0" to="870 0" dur="1.8s" begin="4.4s; sheen-run.end + 7s" fill="freeze"/></linearGradient></defs><g id="word-shape"><path class="word-v" d="M2.11 0 65.96 100 129.82 0H120.51L88.26 48.23L115.81 0H109.74L83.74 38.46L105.07 0H97.54L65.96 49.46L34.38 0H26.85L48.18 38.46L22.19 0H16.12L43.66 48.23L11.42 0Z"/><path class="word-rest" d="M144.61 100H168.28V19.77H162.09L160.39 64.92L158.69 19.77H154.19L152.5 64.92L150.8 19.77H144.61Z M183.21 100H211.66L234.4 73.88H235.69L257.84 100H288.51L250.61 57.55L285.13 19.77H275.66L256.5 41.72L271.79 19.77H266.25L247.4 41.72L262.37 19.77H256.79L237.32 42.27H236.15L217.38 19.77H211.11L225.37 41.72L206.92 19.77H200.93L215.54 41.72L196.73 19.77H186.71L221.22 58.6Z M294.23 100H318.72L324.78 87.17H367.7L373.76 100H399.53L360.12 19.77H354.2L361.97 39.28L350.57 19.77H343.16L331.41 39.28L339.53 19.77H333.64ZM332.71 69.8 339.94 53.47Q340.76 51.84 341.75 49.27Q342.74 46.71 343.91 43.91Q345.07 41.11 345.89 39.01H346.71Q347.17 39.94 347.87 41.87Q348.57 43.79 349.5 46.06Q350.44 48.34 351.25 50.38Q352.07 52.42 352.54 53.47L359.77 69.8Z M413.53 100H435.92V65.25Q435.92 61.4 435.86 58.02Q435.8 54.64 435.8 53.12H436.73Q438.6 54.87 441.63 57.9Q444.66 60.93 447.46 63.38L488.05 100H508.92V19.77H503.06L501.49 64.92L499.85 19.77H495.6L494.07 64.92L492.39 19.77H486.53V55.57Q486.53 58.02 486.59 61.17Q486.65 64.31 486.65 66.41H485.6Q484.31 64.9 482.51 63.15Q480.7 61.4 479.01 59.77Q477.32 58.13 476.27 57.2L434.75 19.77H431.31L459.66 53.72L428.26 19.77H422.25L420.61 53.72L419.2 19.77H413.53Z M522.92 100H547.41L553.47 87.17H596.38L602.45 100H628.22L588.8 19.77H582.89L590.66 39.28L579.25 19.77H571.85L560.09 39.28L568.21 19.77H562.33ZM561.4 69.8 568.63 53.47Q569.45 51.84 570.44 49.27Q571.43 46.71 572.59 43.91Q573.76 41.11 574.58 39.01H575.39Q575.86 39.94 576.56 41.87Q577.26 43.79 578.19 46.06Q579.13 48.34 579.94 50.38Q580.76 52.42 581.22 53.47L588.45 69.8Z"/></g><use class="word-sheen" href="#word-shape" fill="url(#sheen)"/></svg><!-- /statement --></h1>
         <p class="hero-tag">The model that builds your models.</p>
         <p class="hero-lede">Give Vixana a table and the column to predict. It trains many models, tests each one on rows
@@ -55,10 +56,75 @@
           <a class="btn btn-ghost" href="docs.html">Read the docs</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- The Studio, right under the hero -->
+  <section class="band band-white" id="studio" aria-labelledby="studio-title">
+    <div class="band-inner split">
+      <div class="split-text">
+        <h2 id="studio-title" class="title">Give it a table. Get a model.</h2>
+        <p class="lede">Open a file, choose the column you want to predict and how long Vixana may train. It works out
+          the task and the score, trains and compares many models, and hands you the best as one predictor.</p>
+        <ul class="ticks">
+          <li>Experiments, models, predictions and Python notebooks in one window</li>
+          <li>Every run saved as a <code>.vixana</code> file you keep</li>
+          <li>No account with a cloud service, no upload, no bill per run</li>
+        </ul>
+        <a class="btn btn-dark" href="#download">Download the app</a>
+      </div>
       <figure class="split-media media-card media-art" style="--art: url(assets/bg/terrain.webp?v=6.3)">
-        <img src="assets/img/studio.webp" alt="The Vixana Studio showing a finished experiment: log loss 0.0459, a weighted ensemble of two models, trained in 48 seconds." width="1600" height="1000">
+        <img src="assets/img/studio.webp" alt="The Vixana Studio showing a finished experiment: log loss 0.0459, a weighted ensemble of two models, trained in 48 seconds." width="1600" height="1000" loading="lazy">
         <figcaption>The Studio, on your machine</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- Who it is for -->
+  <section class="band band-black" id="who" aria-labelledby="who-title">
+    <div class="band-inner">
+      <h2 id="who-title" class="title title-center">For data that should stay home</h2>
+      <p class="lede lede-center">If your table holds patients, clients or anything you would rather not upload, Vixana
+        trains where the data already is. You bring the table; it brings the models.</p>
+      <div class="who">
+        <article class="who-card who-light">
+          <p class="who-role">Doctors and clinics</p>
+          <h3>Patient records stay in the clinic</h3>
+          <dl><div><dt>You have</dt><dd>past visits and outcomes</dd></div>
+            <div><dt>Vixana predicts</dt><dd>who may miss an appointment, or be readmitted</dd></div></dl>
+          <p class="who-note">A prediction supports your judgement; it does not replace it.</p>
+        </article>
+        <article class="who-card">
+          <p class="who-role">Researchers and students</p>
+          <h3>A strong model without a cloud bill</h3>
+          <dl><div><dt>You have</dt><dd>a study dataset</dd></div>
+            <div><dt>Vixana predicts</dt><dd>the outcome you study, as a baseline to beat or to report</dd></div></dl>
+        </article>
+        <article class="who-card">
+          <p class="who-role">Banks, insurers, accountants</p>
+          <h3>Client data under your own roof</h3>
+          <dl><div><dt>You have</dt><dd>past applications or claims</dd></div>
+            <div><dt>Vixana predicts</dt><dd>which ones deserve a second look</dd></div></dl>
+        </article>
+        <article class="who-card">
+          <p class="who-role">Shops and small businesses</p>
+          <h3>No data team needed</h3>
+          <dl><div><dt>You have</dt><dd>a sales spreadsheet</dd></div>
+            <div><dt>Vixana predicts</dt><dd>next month's demand, or which customers may leave</dd></div></dl>
+        </article>
+        <article class="who-card">
+          <p class="who-role">Engineers and factories</p>
+          <h3>Works on the shop-floor PC</h3>
+          <dl><div><dt>You have</dt><dd>sensor logs and inspection results</dd></div>
+            <div><dt>Vixana predicts</dt><dd>which part may fail, or which batch may not pass</dd></div></dl>
+        </article>
+        <article class="who-card">
+          <p class="who-role">Public services and charities</p>
+          <h3>Sensitive cases, offline</h3>
+          <dl><div><dt>You have</dt><dd>case records</dd></div>
+            <div><dt>Vixana predicts</dt><dd>which cases need help first</dd></div></dl>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -154,16 +220,22 @@
           <p>Drop in a file, choose the column to predict and how long to train. Vixana works out the task, the metric
             and the models.</p>
         </article>
-        <article class="tile-card tile-graphite">
-          <h3>Tested before we said it</h3>
-          <p>The results on this page come from a comparison whose rules were written before it ran, on tables Vixana
-            had never seen.</p>
+        <article class="tile-card tile-wide tile-graphite tile-proof">
+          <h3>Rules first, results second</h3>
+          <p>We wrote down how Vixana would be judged before the first run, then published every result, the losses
+            too.</p>
+          <ol class="proof">
+            <li><strong>Rules sealed</strong><span>scores, time budgets and the win rule, fixed in advance</span></li>
+            <li><strong>Unseen tables</strong><span>30 tables, drawn after 585 known datasets were set aside</span></li>
+            <li><strong>Same machine</strong><span>every system: 5 minutes, 2 CPU threads, one 4 GB GPU</span></li>
+            <li><strong>All of it shown</strong><span>25 wins, 3 losses, 1 tie, and where the CPU engine fell short</span></li>
+          </ol>
         </article>
         <article class="tile-card tile-paper">
           <h3>A small GPU is enough</h3>
           <p>The GPU engine runs on a 4 GB consumer card. Without one, the CPU engine runs anywhere.</p>
         </article>
-        <article class="tile-card tile-full tile-ink tile-art" style="--art: url(assets/bg/dipole.webp?v=6.3)">
+        <article class="tile-card tile-wide tile-ink tile-art" style="--art: url(assets/bg/dipole.webp?v=6.3)">
           <h3>A model file you keep</h3>
           <p>Each run saves one <code>.vixana</code> file. Predict with it from the app, from the command line, or in
             the built-in Python notebooks.</p>
@@ -175,7 +247,43 @@
   <!-- A line to remember, under an arch -->
   <section class="band band-paper band-quote" aria-label="In one line">
     <div class="band-inner quote">
-      <div class="quote-arch" style="--art: url(assets/bg/converge.webp?v=6.3)" aria-hidden="true"></div>
+      <figure class="quote-arch">
+        <svg viewBox="0 0 560 322" role="img" aria-labelledby="mix-title">
+          <title id="mix-title">Four kinds of model, each checked on rows it has not seen, joined into one predictor</title>
+          <defs><clipPath id="arch-clip"><path d="M0 322V280A280 280 0 0 1 560 280V322Z"/></clipPath></defs>
+          <g clip-path="url(#arch-clip)">
+            <rect width="560" height="322" fill="#000"/>
+            <image href="assets/bg/converge.webp?v=6.3" width="560" height="322" preserveAspectRatio="xMidYMid slice" opacity=".28"/>
+            <g fill="none" stroke="#fff" stroke-width="1.4" stroke-opacity=".75">
+              <path d="M236 150C320 150 330 222 392 222"/>
+              <path d="M236 192C318 192 330 222 392 222"/>
+              <path d="M236 234C318 234 330 222 392 222"/>
+              <path d="M236 276C320 276 330 222 392 222"/>
+              <path d="M392 222H456" stroke-opacity="1" stroke-width="2.2"/>
+            </g>
+            <g fill="#000" stroke="#fff" stroke-opacity=".6">
+              <rect x="44" y="133" width="192" height="34" rx="17"/>
+              <rect x="44" y="175" width="192" height="34" rx="17"/>
+              <rect x="44" y="217" width="192" height="34" rx="17"/>
+              <rect x="44" y="259" width="192" height="34" rx="17"/>
+            </g>
+            <g fill="#fff" font-family="Instrument Sans, system-ui, sans-serif" font-size="13.5" text-anchor="middle">
+              <text x="140" y="155">Gradient-boosted trees</text>
+              <text x="140" y="197">Neural networks</text>
+              <text x="140" y="239">Pretrained tabular model</text>
+              <text x="140" y="281">Foundation model · GPU</text>
+            </g>
+            <g font-family="Courier Prime, monospace" font-size="10" letter-spacing="1.4" text-anchor="middle" fill="#cfcfcf">
+              <text x="424" y="208">CHECKED ON</text>
+              <text x="424" y="246">UNSEEN ROWS</text>
+            </g>
+            <circle cx="470" cy="222" r="17" fill="none" stroke="#fff" stroke-opacity=".45"/>
+            <circle cx="470" cy="222" r="9" fill="#fff"/>
+            <text x="470" y="270" fill="#fff" font-family="Archivo Expanded, Arial Black, sans-serif" font-weight="800" font-size="12" text-anchor="middle">ONE</text>
+            <text x="470" y="286" fill="#fff" font-family="Archivo Expanded, Arial Black, sans-serif" font-weight="800" font-size="12" text-anchor="middle">PREDICTOR</text>
+          </g>
+        </svg>
+      </figure>
       <p class="quote-text">“Many models, checked against data they have not seen, joined into one answer. On your own
         computer.”</p>
     </div>
@@ -268,7 +376,7 @@
   <section class="band band-black band-final" aria-labelledby="final-title">
     <div class="band-art" style="--art: url(assets/bg/flow.webp?v=6.3)" aria-hidden="true"></div>
     <div class="band-inner final">
-      <h2 id="final-title" class="title title-center">Give it a table. Get a model.</h2>
+      <h2 id="final-title" class="title title-center">Your data. Your machine. Your model.</h2>
       <div class="field field-center">
         <code data-cmd="unix">curl -fsSL https://vixana.online/install.sh | sh</code>
         <button class="btn btn-dark" type="button" data-copy="unix">Copy</button>
